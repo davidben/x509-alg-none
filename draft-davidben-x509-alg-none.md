@@ -8,8 +8,8 @@ number:
 date:
 consensus: true
 v: 3
-area: "Security"
-workgroup: "lamps"
+# area: "Security"
+# workgroup: "lamps"
 
 author:
  -
