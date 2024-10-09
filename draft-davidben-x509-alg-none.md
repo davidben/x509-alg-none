@@ -8,8 +8,17 @@ number:
 date:
 consensus: true
 v: 3
-# area: "Security"
-# workgroup: "lamps"
+# area: AREA
+# workgroup: WG Working Group
+keyword:
+- self-signed certificate
+venue:
+  # group: WG
+  # type: Working Group
+  # mail: WG@example.com
+  # arch: https://example.com/WG
+  github: USER/REPO
+  latest: https://example.com/LATEST
 
 author:
  -
