@@ -1234,7 +1234,7 @@ id-unsigned OBJECT IDENTIFER ::= { TBD }
 <p id="section-3-3">To construct an unsigned X.509 certificate, the sender MUST set the
 Certificate's signatureAlgorithm and TBSCertificate's signature fields each to
 an AlgorithmIdentifier with algorithm id-unsigned and omitted parameters. The
-Certificate's signatureValue field MUST be an empty BIT STRING.<a href="#section-3-3" class="pilcrow">¶</a></p>
+Certificate's signatureValue field MUST be a BIT STRING of length zero.<a href="#section-3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="consuming-unsigned-certificates">
