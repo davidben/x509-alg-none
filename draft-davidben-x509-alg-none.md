@@ -103,7 +103,7 @@ id-unsigned OBJECT IDENTIFER ::= { TBD }
 To construct an unsigned X.509 certificate, the sender MUST set the
 Certificate's signatureAlgorithm and TBSCertificate's signature fields each to
 an AlgorithmIdentifier with algorithm id-unsigned and omitted parameters. The
-Certificate's signatureValue field MUST be an empty BIT STRING.
+Certificate's signatureValue field MUST be a BIT STRING of length zero.
 
 # Consuming Unsigned Certificates
 
