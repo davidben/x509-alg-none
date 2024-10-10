@@ -117,7 +117,7 @@ X.509 applications must already account for unknown signature algorithms, so
 applications are RECOMMENDED to satisfy these requirements by ignoring this
 document. An unmodified X.509 validator will not recognize id-unsigned and is
 thus already expected to reject it in the certification path. Conversely, in
-context where an X.509 application was ignoring the self-signature, id-unsigned
+contexts where an X.509 application was ignoring the self-signature, id-unsigned
 will also be ignored, but more efficiently.
 
 # Security Considerations
