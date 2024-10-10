@@ -116,7 +116,9 @@ place of a signature in the certification path.
 X.509 applications must already account for unknown signature algorithms, so
 applications are RECOMMENDED to satisfy these requirements by ignoring this
 document. An unmodified X.509 validator will not recognize id-unsigned and is
-thus already expected to reject it in the certification path.
+thus already expected to reject it in the certification path. Conversely, in
+context where an X.509 application was ignoring the self-signature, id-unsigned
+will also be ignored, but more efficiently.
 
 # Security Considerations
 
@@ -144,4 +146,5 @@ This document has no IANA actions.
 {:numbered="false"}
 
 Thanks to Bob Beck, Nick Harper, and Sophie Schmieg for reviewing an early
-iteration of this document.
+iteration of this document. Thanks to Alex Gaynor for providing a link to cite
+for {{JWT}}.
