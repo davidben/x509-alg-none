@@ -4,8 +4,8 @@
 
 Network Working Group                                        D. Benjamin
 Internet-Draft                                                Google LLC
-Intended status: Standards Track                          9 October 2024
-Expires: 12 April 2025
+Intended status: Standards Track                         10 October 2024
+Expires: 13 April 2025
 
 
                       Unsigned X.509 Certificates
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 April 2025.
+   This Internet-Draft will expire on 13 April 2025.
 
 Copyright Notice
 
@@ -151,7 +151,9 @@ Table of Contents
    algorithms, so applications are RECOMMENDED to satisfy these
    requirements by ignoring this document.  An unmodified X.509
    validator will not recognize id-unsigned and is thus already expected
-   to reject it in the certification path.
+   to reject it in the certification path.  Conversely, in context where
+   an X.509 application was ignoring the self-signature, id-unsigned
+   will also be ignored, but more efficiently.
 
 5.  Security Considerations
 
@@ -211,7 +213,8 @@ Table of Contents
 Acknowledgements
 
    Thanks to Bob Beck, Nick Harper, and Sophie Schmieg for reviewing an
-   early iteration of this document.
+   early iteration of this document.  Thanks to Alex Gaynor for
+   providing a link to cite for [JWT].
 
 Author's Address
 
