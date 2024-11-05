@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-03T01:22:03.000911+00:00",
+  "timestamp": "2024-11-05T01:15:30.250436+00:00",
   "repo": "davidben/x509-alg-none",
   "labels": [
     {
@@ -49,6 +49,63 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOM9--mM6c0X-3",
+      "title": "Talk about using id-unsigned for making a self-signed-ness determination",
+      "url": "https://github.com/davidben/x509-alg-none/issues/1",
+      "state": "OPEN",
+      "author": "davidben",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/spasm/IiHCjkChIO7vNsio3jqDJ3daGwE/\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/zL_PEDX_xzuXt08jth91HPzOP5I/\r\n\r\n> The phrase \u201cshould change nothing\u201d caught my eye. Fortunately, the draft does not say this. The context implicitly referenced here is when validating a path or determining the authenticity of a trust anchor. A signature may be checked for other purposes. For example, self-signed-ness may be checked to decide how to handle a cert in support of basic cert store hygiene when installing a certificate (i.e., one doesn\u2019t need a self-signed cert in a pile of intermediates). Those apps would need to change. I think the draft should add some words about the need to recognize id-unsigned where use of self-signed-ness determination (i.e., signature verification) serves purposes other than validating a path or establishing a trust anchor\u2019s authenticity.\r\n\r\n> This is true, but some applications (like the Windows certificate viewer) give an integrity error if you replace a self-signed cert\u2019s algorithm and signature with an unrecognized OID and an empty BIT STRING. This application would need to change as a negative indicator like that may create confusion for some users when installing or viewing a root.\r\n\r\n\r\n",
+      "createdAt": "2024-11-03T05:04:02Z",
+      "updatedAt": "2024-11-03T05:04:02Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOM9--mM6c0YQw",
+      "title": "id-alg-noSignature specifies a hash as a \"signature\"",
+      "url": "https://github.com/davidben/x509-alg-none/issues/2",
+      "state": "OPEN",
+      "author": "davidben",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "id-alg-noSignature actually (somewhat pointlessly it seems) uses a hash of the input as the signature:\r\nhttps://www.rfc-editor.org/rfc/rfc5272.html#appendix-C.1\r\n\r\nDo we still reuse the OID (to avoid defining multiple OIDs with very similar names and purposes) and live with diverging here, or do we make a new OID?",
+      "createdAt": "2024-11-03T05:08:17Z",
+      "updatedAt": "2024-11-03T05:08:17Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOM9--mM6c0YW3",
+      "title": "Generalize to CSRs",
+      "url": "https://github.com/davidben/x509-alg-none/issues/3",
+      "state": "OPEN",
+      "author": "davidben",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Some folks on LAMPS want to apply this to yet another square-peg-in-round-hole situation that X.509 keeps finding itself in. This, however, is only applicable in cases where you _were not verifying the signature in the CSR_. Otherwise, this unsigned CSR has different properties.",
+      "createdAt": "2024-11-03T05:09:49Z",
+      "updatedAt": "2024-11-03T05:11:09Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "davidben",
+          "authorAssociation": "OWNER",
+          "body": "Note generalizing to CSRs may run into https://github.com/davidben/x509-alg-none/issues/2. But if that has already been defined for CSRs, maybe we don't need this.",
+          "createdAt": "2024-11-03T05:11:08Z",
+          "updatedAt": "2024-11-03T05:11:08Z"
+        }
+      ]
+    }
+  ],
   "pulls": []
 }
