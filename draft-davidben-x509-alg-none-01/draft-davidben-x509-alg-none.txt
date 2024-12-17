@@ -4,8 +4,8 @@
 
 Network Working Group                                        D. Benjamin
 Internet-Draft                                                Google LLC
-Intended status: Standards Track                         10 October 2024
-Expires: 13 April 2025
+Intended status: Standards Track                        17 December 2024
+Expires: 20 June 2025
 
 
                       Unsigned X.509 Certificates
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 April 2025.
+   This Internet-Draft will expire on 20 June 2025.
 
 Copyright Notice
 
@@ -128,50 +128,55 @@ Table of Contents
 
 3.  Constructing Unsigned Certificates
 
-   This document defines the id-unsigned OID:
+   This document defines how to use the id-alg-noSignature OID from
+   Appendix C.1 of [RFC5272] with X.509 certificates.
 
-   id-unsigned OBJECT IDENTIFER ::= { TBD }
+     id-pkix OBJECT IDENTIFIER  ::= { iso(1) identified-organization(3)
+         dod(6) internet(1) security(5) mechanisms(5) pkix(7) }
+
+     id-alg-noSignature OBJECT IDENTIFIER ::= {id-pkix id-alg(6) 2}
 
    To construct an unsigned X.509 certificate, the sender MUST set the
    Certificate's signatureAlgorithm and TBSCertificate's signature
-   fields each to an AlgorithmIdentifier with algorithm id-unsigned and
-   omitted parameters.  The Certificate's signatureValue field MUST be
-   an empty BIT STRING.
+   fields each to an AlgorithmIdentifier with algorithm id-alg-
+   noSignature.  The parameters for id-alg-noSignature MUST be present
+   and MUST be encoded as NULL.  The Certificate's signatureValue field
+   MUST be a BIT STRING of length zero.
 
 4.  Consuming Unsigned Certificates
 
-   Signatures of type id-unsigned are always invalid.  This contrasts
-   with [JWT].  When processing X.509 certificates without verifying
-   signatures, receivers MAY accept id-unsigned.  When verifying X.509
-   signatures, receivers MUST reject id-unsigned.  In particular, X.509
-   validators MUST NOT accept id-unsigned in the place of a signature in
-   the certification path.
+   X.509 signatures of type id-alg-noSignature are always invalid.  This
+   contrasts with [JWT].  When processing X.509 certificates without
+   verifying signatures, receivers MAY accept id-alg-noSignature.  When
+   verifying X.509 signatures, receivers MUST reject id-alg-noSignature.
+   In particular, X.509 validators MUST NOT accept id-alg-noSignature in
+   the place of a signature in the certification path.
 
    X.509 applications must already account for unknown signature
    algorithms, so applications are RECOMMENDED to satisfy these
    requirements by ignoring this document.  An unmodified X.509
-   validator will not recognize id-unsigned and is thus already expected
-   to reject it in the certification path.  Conversely, in contexts
-   where an X.509 application was ignoring the self-signature, id-
-   unsigned will also be ignored, but more efficiently.
+   validator will not recognize id-alg-noSignature and is thus already
+   expected to reject it in the certification path.  Conversely, in
+   contexts where an X.509 application was ignoring the self-signature,
+   id-alg-noSignature will also be ignored, but more efficiently.
 
 5.  Security Considerations
 
    If an application uses a self-signature when constructing a subject-
    only certificate for a non-X.509 key, the X.509 signature payload and
    those of the key's intended use may collide.  The self-signature
-   might then be used as part of a cross-protocol attack.  Using id-
-   unsigned avoids a single key being used for both X.509 and the end-
-   entity protocol, eliminating this risk.
+   might then be used as part of a cross-protocol attack.  Using id-alg-
+   noSignature avoids a single key being used for both X.509 and the
+   end-entity protocol, eliminating this risk.
 
-   If an application accepts id-unsigned as part of a certification
-   path, or in any other context where it is necessary to verify the
-   X.509 signature, the signature check would be bypassed.  Thus,
-   Section 4 prohibits this and recommends that applications not treat
-   id-unsigned differently from any other previously unrecognized
-   signature algorithm.  Non-compliant applications that instead accept
-   id-unsigned as a valid signature risk of vulnerabilities analogous to
-   [JWT].
+   If an application accepts id-alg-noSignature as part of a
+   certification path, or in any other context where it is necessary to
+   verify the X.509 signature, the signature check would be bypassed.
+   Thus, Section 4 prohibits this and recommends that applications not
+   treat id-alg-noSignature differently from any other previously
+   unrecognized signature algorithm.  Non-compliant applications that
+   instead accept id-alg-noSignature as a valid signature risk of
+   vulnerabilities analogous to [JWT].
 
 6.  IANA Considerations
 
@@ -185,6 +190,10 @@ Table of Contents
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC5272]  Schaad, J. and M. Myers, "Certificate Management over CMS
+              (CMC)", RFC 5272, DOI 10.17487/RFC5272, June 2008,
+              <https://www.rfc-editor.org/rfc/rfc5272>.
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
@@ -214,7 +223,9 @@ Acknowledgements
 
    Thanks to Bob Beck, Nick Harper, and Sophie Schmieg for reviewing an
    early iteration of this document.  Thanks to Alex Gaynor for
-   providing a link to cite for [JWT].
+   providing a link to cite for [JWT].  Thanks to Russ Housley for
+   pointing out that id-alg-noSignature was already defined in
+   [RFC5272].
 
 Author's Address
 
