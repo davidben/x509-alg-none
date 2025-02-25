@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-23T01:22:34.678772+00:00",
+  "timestamp": "2025-02-25T01:19:05.792369+00:00",
   "repo": "davidben/x509-alg-none",
   "labels": [
     {
@@ -107,5 +107,46 @@
       ]
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 4,
+      "id": "PR_kwDOM9--mM6MWSy8",
+      "title": "subtle change to the intent of the OID",
+      "url": "https://github.com/davidben/x509-alg-none/pull/4",
+      "state": "OPEN",
+      "author": "frumioj",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I feel like it's not so much on what the consumer should do, but more about what the sender is indicating - \"I didn't sign this because I'm not expecting you to validate my signature\" (or \"Too Long, Didn't Send\"?)",
+      "createdAt": "2025-02-24T20:25:06Z",
+      "updatedAt": "2025-02-24T22:07:03Z",
+      "baseRepository": "davidben/x509-alg-none",
+      "baseRefName": "main",
+      "baseRefOid": "7d8b64eeaab6a8ea1be29f560cabd9b26871da21",
+      "headRepository": "frumioj/x509-alg-none",
+      "headRefName": "patch-1",
+      "headRefOid": "e770f21d66ef4c5c6abefbe3744d4b2457d20609",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOM9--mM6dRR2c",
+          "commit": {
+            "abbreviatedOid": "e770f21"
+          },
+          "author": "davidben",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Ah yeah that's a good change. I will hold off on merging it *quite* yet, just because the document is mid adoption call and, in the past, people have gotten antsy about unexpected changes between `draft-davidben-...-N` and `draft-ietf-...-00`. But will merge after that.",
+          "createdAt": "2025-02-24T22:07:03Z",
+          "updatedAt": "2025-02-24T22:07:03Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
 }
