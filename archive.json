@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-25T01:19:05.792369+00:00",
+  "timestamp": "2025-02-27T01:18:52.742298+00:00",
   "repo": "davidben/x509-alg-none",
   "labels": [
     {
@@ -105,6 +105,46 @@
           "updatedAt": "2024-11-03T05:11:08Z"
         }
       ]
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOM9--mM6roNU_",
+      "title": "Guidance on issuer field",
+      "url": "https://github.com/davidben/x509-alg-none/issues/5",
+      "state": "OPEN",
+      "author": "davidben",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "What to put in the issuer field is an interesting question because there is no issuer. Right now we just don't say anything. I can think of a few options:\n\n* Copy the subject. This is most similar to self-signed certificates, but it is kind of a waste\n* Empty issuer. This isn't allowed by RFC 5280 and likely has compatibility implications\n* A well-defined short placeholder\n* Don't say anything and leave it as an exercise for the reader (status quo)",
+      "createdAt": "2025-02-25T20:00:37Z",
+      "updatedAt": "2025-02-26T19:26:34Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "ghen2",
+          "authorAssociation": "NONE",
+          "body": "\"Copy the subject\" may not work for EE certificates, where Subject is on the way out, superseded by SAN.\n\"Empty issuer\" seems most obvious, but isn't allowed.  So perhaps best to specify a fixed placeholder issuer, which also helps to distinguish \"no signature\" from \"unknown signature algorithm\".  (and could be linked to #6 to give this thing a common name.)",
+          "createdAt": "2025-02-26T19:26:33Z",
+          "updatedAt": "2025-02-26T19:26:33Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOM9--mM6roNtA",
+      "title": "Rename unsigned to... something",
+      "url": "https://github.com/davidben/x509-alg-none/issues/6",
+      "state": "OPEN",
+      "author": "davidben",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "There's some chatter on LAMPS about a better name instead of \"unsigned certificates\". Filing this to remember there's a decision point here.",
+      "createdAt": "2025-02-25T20:01:28Z",
+      "updatedAt": "2025-02-25T20:01:28Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
