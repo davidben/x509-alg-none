@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-27T01:18:52.742298+00:00",
+  "timestamp": "2025-03-02T01:23:25.346534+00:00",
   "repo": "davidben/x509-alg-none",
   "labels": [
     {
@@ -145,6 +145,30 @@
       "updatedAt": "2025-02-25T20:01:28Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOM9--mM6sIDb9",
+      "title": "Add the edges vs nodes analogy directly in draft",
+      "url": "https://github.com/davidben/x509-alg-none/issues/7",
+      "state": "OPEN",
+      "author": "davidben",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "See feedback here https://mailarchive.ietf.org/arch/msg/spasm/ZcHAMeEent8_3353leFp7ZIDqUI/",
+      "createdAt": "2025-02-28T18:11:26Z",
+      "updatedAt": "2025-02-28T18:13:53Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "davidben",
+          "authorAssociation": "OWNER",
+          "body": "(Holding this to after adoption call resolves one way or another.)",
+          "createdAt": "2025-02-28T18:13:51Z",
+          "updatedAt": "2025-02-28T18:13:51Z"
+        }
+      ]
     }
   ],
   "pulls": [
