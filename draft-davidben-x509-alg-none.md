@@ -94,6 +94,9 @@ when, and only when, they appear in all capitals, as shown here.
 
 # Constructing Unsigned Certificates
 
+[[TODO: It's an open question whether we should use this existing OID or define
+a new one. See issue #2.]]
+
 This document defines how to use the id-alg-noSignature OID from
 {{Appendix C.1 of !RFC5272}} with X.509 certificates.
 
