@@ -4,8 +4,8 @@
 
 Network Working Group                                        D. Benjamin
 Internet-Draft                                                Google LLC
-Intended status: Standards Track                         11 October 2024
-Expires: 14 April 2025
+Intended status: Standards Track                           20 March 2025
+Expires: 21 September 2025
 
 
                       Unsigned X.509 Certificates
@@ -44,11 +44,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 April 2025.
+   This Internet-Draft will expire on 21 September 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -127,6 +127,9 @@ Table of Contents
    capitals, as shown here.
 
 3.  Constructing Unsigned Certificates
+
+   [[TODO: It's an open question whether we should use this existing OID
+   or define a new one.  See issue #2.]]
 
    This document defines how to use the id-alg-noSignature OID from
    Appendix C.1 of [RFC5272] with X.509 certificates.
