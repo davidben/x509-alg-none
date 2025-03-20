@@ -2,7 +2,7 @@
 title: "Unsigned X.509 Certificates"
 category: std
 
-docname: draft-davidben-x509-alg-none-latest
+docname: draft-ietf-lamps-x509-alg-none-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
