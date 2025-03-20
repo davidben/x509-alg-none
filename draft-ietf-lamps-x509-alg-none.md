@@ -8,17 +8,17 @@ number:
 date:
 consensus: true
 v: 3
-# area: AREA
-# workgroup: WG Working Group
+area: "Security"
+workgroup: "Limited Additional Mechanisms for PKIX and SMIME"
 keyword:
 - self-signed certificate
 venue:
-  # group: WG
-  # type: Working Group
-  # mail: WG@example.com
-  # arch: https://example.com/WG
+  group: "Limited Additional Mechanisms for PKIX and SMIME"
+  type: "Working Group"
+  mail: "spasm@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/spasm/"
   github: "davidben/x509-alg-none"
-  latest: "https://davidben.github.io/x509-alg-none/draft-davidben-x509-alg-none.html"
+  latest: "https://davidben.github.io/x509-alg-none/draft-ietf-lamps-x509-alg-none.html"
 
 author:
  -
