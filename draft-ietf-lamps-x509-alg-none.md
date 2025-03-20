@@ -48,15 +48,20 @@ signature.
 # Introduction
 
 An X.509 certificate {{!RFC5280}} relates two entities in the PKI: information
-about a subject and a proof from an issuer. Some applications, however, only
-require subject information. For example, an X.509 trust anchor is described by
-information about the subject (a root certification authority, or root CA). The
-relying party trusts this information out-of-band and does not require an
+about a subject and a proof from an issuer. Viewing the PKI as a graph of
+with entities as nodes, as in {{?RFC4158}}, a certificate is an edge between the
+subject and issuer.
+
+In some contexts, an application needs standalone subject information instead of
+a certificate. In the graph model, the application needs a node, not an edge.
+For example, certification path validation ({{Section 6 of !RFC5280}}) begins at
+a trust anchor, or root certification authority (root CA). The application
+trusts this trust anchor information out-of-band and does not require an
 issuer's signature.
 
-X.509 does not define such a structure. Instead, X.509 trust anchors often use
-"self-signed" certificates, where the CA's key is used to sign the certificate.
-Other formats, such as {{?RFC5914}} exist to convey trust anchors, but
+X.509 does not define a structure for this scenario. Instead, X.509 trust
+anchors are often represented with "self-signed" certificates, where the
+subject's key signs over itself. Other formats, such as {{?RFC5914}} exist to convey trust anchors, but
 self-signed certificates remain widely used. Additionally, some TLS {{?RFC8446}}
 server deployments use self-signed certificates when they do not intend to
 present a CA-issued identity, instead expecting the relying party to
