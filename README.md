@@ -1,11 +1,11 @@
 # Unsigned X.509 Certificates
 
-This is the working area for the individual Internet-Draft, "Unsigned X.509 Certificates".
+This is the working area for the IETF [LAMPS Working Group](https://datatracker.ietf.org/group/lamps/documents/) Internet-Draft, "Unsigned X.509 Certificates".
 
-* [Editor's Copy](https://davidben.github.io/x509-alg-none/#go.draft-davidben-x509-alg-none.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-davidben-x509-alg-none)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-davidben-x509-alg-none)
-* [Compare Editor's Copy to Individual Draft](https://davidben.github.io/x509-alg-none/#go.draft-davidben-x509-alg-none.diff)
+* [Editor's Copy](https://davidben.github.io/x509-alg-none/#go.draft-ietf-lamps-x509-alg-none.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-lamps-x509-alg-none)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-lamps-x509-alg-none)
+* [Compare Editor's Copy to Working Group Draft](https://davidben.github.io/x509-alg-none/#go.draft-ietf-lamps-x509-alg-none.diff)
 
 
 ## Contributing
