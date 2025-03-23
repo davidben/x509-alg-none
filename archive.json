@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-20T01:20:42.776212+00:00",
+  "timestamp": "2025-03-23T01:26:57.442509+00:00",
   "repo": "davidben/x509-alg-none",
   "labels": [
     {
@@ -78,9 +78,17 @@
       "labels": [],
       "body": "id-alg-noSignature actually (somewhat pointlessly it seems) uses a hash of the input as the signature:\r\nhttps://www.rfc-editor.org/rfc/rfc5272.html#appendix-C.1\r\n\r\nDo we still reuse the OID (to avoid defining multiple OIDs with very similar names and purposes) and live with diverging here, or do we make a new OID?",
       "createdAt": "2024-11-03T05:08:17Z",
-      "updatedAt": "2024-11-03T05:08:17Z",
+      "updatedAt": "2025-03-21T04:35:20Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "body": "I am in favor of the current state in v01 because\n* it leaves out the useless and confusing hash value loosely defined in [RFC 5272 appendix C.1](https://datatracker.ietf.org/doc/html/rfc5272#appendix-C.1) for signature-less CSRs\n* it defines its own OID to point out the difference that there is no hash here. ",
+          "createdAt": "2025-03-21T04:35:19Z",
+          "updatedAt": "2025-03-21T04:35:19Z"
+        }
+      ]
     },
     {
       "number": 3,
@@ -151,15 +159,15 @@
       "id": "I_kwDOM9--mM6sIDb9",
       "title": "Add the edges vs nodes analogy directly in draft",
       "url": "https://github.com/davidben/x509-alg-none/issues/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "davidben",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "See feedback here https://mailarchive.ietf.org/arch/msg/spasm/ZcHAMeEent8_3353leFp7ZIDqUI/",
       "createdAt": "2025-02-28T18:11:26Z",
-      "updatedAt": "2025-02-28T18:13:53Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-20T09:24:32Z",
+      "closedAt": "2025-03-20T09:24:32Z",
       "comments": [
         {
           "author": "davidben",
@@ -184,7 +192,7 @@
       "labels": [],
       "body": "I feel like it's not so much on what the consumer should do, but more about what the sender is indicating - \"I didn't sign this because I'm not expecting you to validate my signature\" (or \"Too Long, Didn't Send\"?)",
       "createdAt": "2025-02-24T20:25:06Z",
-      "updatedAt": "2025-02-24T22:07:03Z",
+      "updatedAt": "2025-03-20T07:42:53Z",
       "baseRepository": "davidben/x509-alg-none",
       "baseRefName": "main",
       "baseRefOid": "7d8b64eeaab6a8ea1be29f560cabd9b26871da21",
@@ -195,7 +203,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "davidben",
+          "authorAssociation": "OWNER",
+          "body": "Ah whoops, I forgot that one of the consequences of waiting to do the draft-ietf version first is that now we have a merge conflict. :-( Do you mind rebasing and updating? Thanks!",
+          "createdAt": "2025-03-20T07:42:53Z",
+          "updatedAt": "2025-03-20T07:42:53Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOM9--mM6dRR2c",
