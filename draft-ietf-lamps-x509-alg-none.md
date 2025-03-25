@@ -112,6 +112,15 @@ an AlgorithmIdentifier with algorithm id-unsigned. The parameters for
 id-unsigned MUST be present and MUST be encoded as NULL. The
 Certificate's signatureValue field MUST be a BIT STRING of length zero.
 
+An unsigned certificate has no issuer, so there no meaningful values to use for
+the issuer and issuerUniqueID fields and the authority key identifier and issuer
+alternative name extensions. This document does not mandate particular values
+but gives general guidance: Senders SHOULD omit issuerUniqueID, authority key
+identifier, and issuer alternative name, unless needed for compatibility with
+existing applications. {{!RFC5280}} does not permit empty issuers. Senders MAY
+use the subject field (if the subject is not empty), as in a self-signed
+certificate, or instead use a short placeholder value.
+
 # Consuming Unsigned Certificates
 
 X.509 signatures of type id-unsigned are always invalid. This contrasts
