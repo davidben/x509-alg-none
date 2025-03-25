@@ -128,6 +128,11 @@ and is thus already expected to reject it in the certification path. Conversely,
 in contexts where an X.509 application was ignoring the self-signature,
 id-unsigned will also be ignored, but more efficiently.
 
+In other contexts, applications may require modifications. For example, an
+application that uses self-signedness in interpreting its local configuration
+may need to modify its configuration model or user interface before using an
+unsigned certificate as a trust anchor.
+
 # Security Considerations
 
 If an application uses a self-signature when constructing a subject-only
