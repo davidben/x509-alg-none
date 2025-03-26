@@ -112,7 +112,7 @@ an AlgorithmIdentifier with algorithm id-unsigned. The parameters for
 id-unsigned MUST be present and MUST be encoded as NULL. The
 Certificate's signatureValue field MUST be a BIT STRING of length zero.
 
-An unsigned certificate has no issuer, so there no meaningful values to use for
+An unsigned certificate has no issuer, so there are no meaningful values to use for
 the issuer and issuerUniqueID fields and the authority key identifier and issuer
 alternative name extensions. This document does not mandate particular values
 but gives general guidance: Senders SHOULD omit issuerUniqueID, authority key
