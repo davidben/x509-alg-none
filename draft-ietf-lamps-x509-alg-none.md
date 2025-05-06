@@ -40,7 +40,7 @@ informative:
 --- abstract
 
 This document defines a placeholder X.509 signature algorithm that may be used
-in contexts where the consumer of the certificate does not intend to verify the
+in contexts where the consumer of the certificate is not expected to verify the
 signature.
 
 --- middle
