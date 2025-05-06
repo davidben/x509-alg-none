@@ -4,8 +4,8 @@
 
 Limited Additional Mechanisms for PKIX and SMIME             D. Benjamin
 Internet-Draft                                                Google LLC
-Intended status: Standards Track                           26 March 2025
-Expires: 27 September 2025
+Intended status: Standards Track                              6 May 2025
+Expires: 7 November 2025
 
 
                       Unsigned X.509 Certificates
@@ -14,8 +14,8 @@ Expires: 27 September 2025
 Abstract
 
    This document defines a placeholder X.509 signature algorithm that
-   may be used in contexts where the consumer of the certificate does
-   not intend to verify the signature.
+   may be used in contexts where the consumer of the certificate is not
+   expected to verify the signature.
 
 About This Document
 
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 September 2025.
+   This Internet-Draft will expire on 7 November 2025.
 
 Copyright Notice
 
