@@ -99,17 +99,17 @@ when, and only when, they appear in all capitals, as shown here.
 
 # Constructing Unsigned Certificates
 
-This document defines the id-unsigned object identifier (OID) under the OID arc
+This document defines the id-alg-unsigned object identifier (OID) under the OID arc
 defined in {{!RFC8411}}:
 
 ~~~
-  id-unsigned OBJECT IDENTIFIER ::= {1 3 101 TBD}
+  id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 TBD}
 ~~~
 
 To construct an unsigned X.509 certificate, the sender MUST set the
 Certificate's signatureAlgorithm and TBSCertificate's signature fields each to
-an AlgorithmIdentifier with algorithm id-unsigned. The parameters for
-id-unsigned MUST be present and MUST be encoded as NULL. The
+an AlgorithmIdentifier with algorithm id-alg-unsigned. The parameters for
+id-alg-unsigned MUST be present and MUST be encoded as NULL. The
 Certificate's signatureValue field MUST be a BIT STRING of length zero.
 
 An unsigned certificate has no issuer, so there are no meaningful values to use for
@@ -123,19 +123,19 @@ certificate, or instead use a short placeholder value.
 
 # Consuming Unsigned Certificates
 
-X.509 signatures of type id-unsigned are always invalid. This contrasts
+X.509 signatures of type id-alg-unsigned are always invalid. This contrasts
 with {{JWT}}. When processing X.509 certificates without verifying signatures,
-receivers MAY accept id-unsigned. When verifying X.509 signatures,
-receivers MUST reject id-unsigned. In particular, X.509 validators MUST
-NOT accept id-unsigned in the place of a signature in the certification
+receivers MAY accept id-alg-unsigned. When verifying X.509 signatures,
+receivers MUST reject id-alg-unsigned. In particular, X.509 validators MUST
+NOT accept id-alg-unsigned in the place of a signature in the certification
 path.
 
 X.509 applications must already account for unknown signature algorithms, so
 applications are RECOMMENDED to satisfy these requirements by ignoring this
-document. An unmodified X.509 validator will not recognize id-unsigned
+document. An unmodified X.509 validator will not recognize id-alg-unsigned
 and is thus already expected to reject it in the certification path. Conversely,
 in contexts where an X.509 application was ignoring the self-signature,
-id-unsigned will also be ignored, but more efficiently.
+id-alg-unsigned will also be ignored, but more efficiently.
 
 In other contexts, applications may require modifications. For example, an
 application that uses self-signedness in interpreting its local configuration
@@ -147,25 +147,25 @@ unsigned certificate as a trust anchor.
 If an application uses a self-signature when constructing a subject-only
 certificate for a non-X.509 key, the X.509 signature payload and those of the
 key's intended use may collide. The self-signature might then be used as part of
-a cross-protocol attack. Using id-unsigned avoids a single key being used
+a cross-protocol attack. Using id-alg-unsigned avoids a single key being used
 for both X.509 and the end-entity protocol, eliminating this risk.
 
-If an application accepts id-unsigned as part of a certification path, or
+If an application accepts id-alg-unsigned as part of a certification path, or
 in any other context where it is necessary to verify the X.509 signature, the
 signature check would be bypassed. Thus, {{consuming-unsigned-certificates}}
-prohibits this and recommends that applications not treat id-unsigned
+prohibits this and recommends that applications not treat id-alg-unsigned
 differently from any other previously unrecognized signature algorithm.
-Non-compliant applications that instead accept id-unsigned as a valid
+Non-compliant applications that instead accept id-alg-unsigned as a valid
 signature risk of vulnerabilities analogous to {{JWT}}.
 
 # IANA Considerations
 
 IANA is requested to add the following entry to the
-"SMI Security for Cryptographic Algorithms" registry {{!RFC8411}}:
+"SMI Security for PKIX Algorithms" registry {{!RFC7299}}:
 
-| Decimal | Description | References |
-|---------|-------------|------------|
-| TBD     | id-unsigned | [this-RFC] |
+| Decimal | Description     | References |
+|---------|-----------------|------------|
+| TBD     | id-alg-unsigned | [this-RFC] |
 
 --- back
 
