@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-13T02:51:12.500478+00:00",
+  "timestamp": "2025-05-08T01:27:49.237852+00:00",
   "repo": "davidben/x509-alg-none",
   "labels": [
     {
@@ -71,15 +71,15 @@
       "id": "I_kwDOM9--mM6c0YQw",
       "title": "id-alg-noSignature specifies a hash as a \"signature\"",
       "url": "https://github.com/davidben/x509-alg-none/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "davidben",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "id-alg-noSignature actually (somewhat pointlessly it seems) uses a hash of the input as the signature:\r\nhttps://www.rfc-editor.org/rfc/rfc5272.html#appendix-C.1\r\n\r\nDo we still reuse the OID (to avoid defining multiple OIDs with very similar names and purposes) and live with diverging here, or do we make a new OID?",
       "createdAt": "2024-11-03T05:08:17Z",
-      "updatedAt": "2025-03-21T04:35:20Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-06T18:37:46Z",
+      "closedAt": "2025-05-06T18:37:45Z",
       "comments": [
         {
           "author": "DDvO",
@@ -87,6 +87,13 @@
           "body": "I am in favor of the current state in v01 because\n* it leaves out the useless and confusing hash value loosely defined in [RFC 5272 appendix C.1](https://datatracker.ietf.org/doc/html/rfc5272#appendix-C.1) for signature-less CSRs\n* it defines its own OID to point out the difference that there is no hash here. ",
           "createdAt": "2025-03-21T04:35:19Z",
           "updatedAt": "2025-03-21T04:35:19Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "OWNER",
+          "body": "Sounds like this is what most people are happy with, so closing this.",
+          "createdAt": "2025-05-06T18:37:45Z",
+          "updatedAt": "2025-05-06T18:37:45Z"
         }
       ]
     },
@@ -95,15 +102,15 @@
       "id": "I_kwDOM9--mM6c0YW3",
       "title": "Generalize to CSRs",
       "url": "https://github.com/davidben/x509-alg-none/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "davidben",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Some folks on LAMPS want to apply this to yet another square-peg-in-round-hole situation that X.509 keeps finding itself in. This, however, is only applicable in cases where you _were not verifying the signature in the CSR_. Otherwise, this unsigned CSR has different properties.",
       "createdAt": "2024-11-03T05:09:49Z",
-      "updatedAt": "2024-11-03T05:11:09Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-06T18:38:19Z",
+      "closedAt": "2025-05-06T18:38:18Z",
       "comments": [
         {
           "author": "davidben",
@@ -111,6 +118,13 @@
           "body": "Note generalizing to CSRs may run into https://github.com/davidben/x509-alg-none/issues/2. But if that has already been defined for CSRs, maybe we don't need this.",
           "createdAt": "2024-11-03T05:11:08Z",
           "updatedAt": "2024-11-03T05:11:08Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "OWNER",
+          "body": "Closing this since it sounds like folks are fine leaving it as-is. We can always write another document if needed.",
+          "createdAt": "2025-05-06T18:38:18Z",
+          "updatedAt": "2025-05-06T18:38:18Z"
         }
       ]
     },
@@ -126,7 +140,7 @@
       "labels": [],
       "body": "What to put in the issuer field is an interesting question because there is no issuer. Right now we just don't say anything. I can think of a few options:\n\n* Copy the subject. This is most similar to self-signed certificates, but it is kind of a waste\n* Empty issuer. This isn't allowed by RFC 5280 and likely has compatibility implications\n* A well-defined short placeholder\n* Don't say anything and leave it as an exercise for the reader (status quo)",
       "createdAt": "2025-02-25T20:00:37Z",
-      "updatedAt": "2025-04-12T19:43:40Z",
+      "updatedAt": "2025-05-07T20:26:25Z",
       "closedAt": null,
       "comments": [
         {
@@ -177,6 +191,41 @@
           "body": "> \"Copy the subject\" may not work for EE certificates, where Subject is on the way out, superseded by SAN. \n\nWhen copying the subject Distinguished Name (DN) to the issuer DN, no need to copy also any SAN extensions, \nso no issue from that angle, but as mentioned for the first option:\n\n> * Copy the subject. This is most similar to self-signed certificates, but it is kind of a waste\n\nthis would be a waste, and moreover it would be similarly confusing as a self-signature.\nSo for both these reasons, not the best option.\n\n>\"Empty issuer\" seems most obvious, but isn't allowed.\n\nWell, it depends on what is meant by \"empty issuer\" and by \"not allowed\".\nNote that semantic requirements by X.509 and RFC 5280 do not apply to trust anchors (TAs) even if TAs have the format of an X.509 public-key certificate - TAs have been explicitly exempted from these.\n\nEven when using that format, from a syntactic perspective an \"empty\" issuer can be represented easily:\nnot by omitting the `issuer` field, which indeed would not be possible because it is non-optional,\nbut as a so-called \"NULL-DN\", which is a zero-length SEQUENCE OF RelativeDistinguishedNames (RDNs), \nwith the DER encoding consisting of two bytes: 0x30 0x00.\n\n> So perhaps best to specify a fixed placeholder issuer, which also helps to distinguish \"no signature\" from \"unknown signature algorithm\". (and could be linked to [#6](https://github.com/davidben/x509-alg-none/issues/6) to give this thing a common name.)\n\nYes - the NULL-DN can serve for this purpose. It is the shortest and simplest such placeholder.\nTherefore I see it as the canonical choice. In a sense, it covers options 2 and/or 3:\n\n> * Empty issuer. [...]\n> * A well-defined short placeholder\n\nThe fourth option:\n\n> * Don't say anything and leave it as an exercise for the reader (status quo)\n\nis not desirable because it just defers a solution and would bear the strong risk of leading to confusion and incompatibility.\n\nSo in my view, placing the NULL-DN value in the `issuer` field is clearly the best option.\n\n\n",
           "createdAt": "2025-04-12T19:43:38Z",
           "updatedAt": "2025-04-12T19:43:38Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "OWNER",
+          "body": "@DDvO By \"empty issuer\" I mean NULL-DN and by \"not allowed\" I mean that RFC 5280 forbids it:\n\n>    The issuer field identifies the entity that has signed and issued the\n>   certificate.  The issuer field MUST contain a non-empty distinguished\n>   name (DN).\n\nBecause of that, I do not think we can reasonably use that as the placeholder value.\n\n> Note that semantic requirements by X.509 and RFC 5280 do not apply to trust anchors (TAs) even if TAs have the format of an X.509 public-key certificate - TAs have been explicitly exempted from these.\n\nWhile that's true, I expect that this would trip enough linters and strict parsers that it would probably cause more trouble than is worth it to use it here. It's a pity, because I would otherwise agree that NULL-DN would be a natural placeholder here.",
+          "createdAt": "2025-05-06T18:56:53Z",
+          "updatedAt": "2025-05-06T18:56:53Z"
+        },
+        {
+          "author": "ghen2",
+          "authorAssociation": "NONE",
+          "body": "Also, the use case is not only trust anchors, but also generic self-signed (ie. not CA-issued) certificates for TLS servers.  So X.509 semantics are indeed relevant here.",
+          "createdAt": "2025-05-06T19:22:58Z",
+          "updatedAt": "2025-05-06T19:22:58Z"
+        },
+        {
+          "author": "bob-beck",
+          "authorAssociation": "NONE",
+          "body": "I agree we can't get away from wanting this to work when subject == issuer for compatibility. by supporting that we can still use this with years and years of validators that do not check signature and would otherwise need an update to understand a fixed value.  So imo the guidance should be either subject == issuer, or a chosen defined \"This is not signed by anything\" DN which sadly can not be the NULL-DN. ",
+          "createdAt": "2025-05-07T16:34:23Z",
+          "updatedAt": "2025-05-07T16:34:23Z"
+        },
+        {
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "body": "> [@DDvO](https://github.com/DDvO) By \"empty issuer\" I mean NULL-DN and by \"not allowed\" I mean that RFC 5280 forbids it:\n> \n> > The issuer field identifies the entity that has signed and issued the\n> > certificate.  The issuer field MUST contain a non-empty distinguished\n> > name (DN).\n> \n> Because of that, I do not think we can reasonably use that as the placeholder value.\n> \n> > Note that semantic requirements by X.509 and RFC 5280 do not apply to trust anchors (TAs) even if TAs have the format of an X.509 public-key certificate - TAs have been explicitly exempted from these.\n\nThe statement that \"RFC 5280 forbids NULL-DN\" for the issuer field of a cert used as a TA is wrong.\nAlso the sentence \"`{{!RFC5280}} does not permit empty issuers.`\" in the [proposed text](https://github.com/davidben/x509-alg-none/commit/465030b947e619bdee082057e66e3d359123395b) is wrong and misleading. It should be re-phrased to give the real reason.\n\nAgain, RFC 5280 does not apply to TA certs, and thus the above mentioned requirement from its [section 4.1.2.4](https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.4) does NOT apply.\nFor data structures that look like an X.509 public-key cert but are just trust anchors, alleged X.509 / RFC 5280 requirements  \n are nothing but a very widespread misinterpretation.\n\n> While that's true, I expect that this would trip enough linters and strict parsers that it would probably cause more trouble than is worth it to use it here.\n\nI just had a look at the OpenSSL implementation and found that non-emptiness of the issuer DN ist not checked by default,\nbut with the `X509_V_FLAG_X509_STRICT` flag (or `-x509_strict` CLI option, respectively), unfortunately this does get checked also for trust anchor certs.\nI must admit that it was me who [added this check to `x509_vfy.c`](https://github.com/openssl/openssl/blob/d56f9b4d894d1a3ce92f1c308ef42398495943e7/crypto/x509/x509_vfy.c#L666)  (and several related checks) \nwhile at that time not being aware myself that all those checks should not be applied to TA certs at the end of the chain.\n\n> It's a pity, because I would otherwise agree that NULL-DN would be a natural placeholder here.\n\nYes, it's a pity that for pragmatic reasons (namely, likely wrong TA cert checks in various implementations)\nit will not be feasible to use NULL-DN here.\n",
+          "createdAt": "2025-05-07T18:19:06Z",
+          "updatedAt": "2025-05-07T18:19:06Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "OWNER",
+          "body": "I suppose whether rules for public key certificates apply when you use a public key certificate to represent a trust anchor, even though trust anchors aren't public key certificates, is one of those great philosophical debates that it's best to avoid stepping into. \ud83d\ude06 \n\nFWIW, I checked the ITU specification and it says:\n\n> IETF RFC 5914 defines trust anchor information as a choice among three alternatives:\n>\n> ```\n> TrustAnchorChoice ::= CHOICE {\n>  certificate Certificate,\n>  tbsCert [1] EXPLICIT TBSCertificate,\n>  taInfo [2] EXPLICIT TrustAnchorInfo }\n> ```\n> The certificate alternative specifies a public-key certificate that can be either a self-signed certificate or a public-key\ncertificate.\n> The tbsCert alternative specifies an unsigned public-key certificate as defined in clause 7.2.\n> NOTE 3 \u2013 This alternative is deprecated by this Specification and therefore not considered further.\n> The taInfo alternative specifies a special trust anchor information format defined by IETF RFC 5914.\n> If the trust anchor information is not used for signing public-key certificates, it shall be an end-entity public-key certificate.\n\nThat seems to suggest that this \"is\" a public-key certificate. The ITU definition of a public-key certificate has the same prohibition, so it's not just the RFC 5280 profile of X.509:\n\n> The issuer component shall hold the distinguished name of the CA that issued the public-key certificate. It shall hold a\nnon-empty distinguished name.\n\nSo I think parsers that forbid NULL-DN here are on regrettably solid footing. Do you think it still makes sense to soften the proposed text, given that? If so, how do you feel about:\n\n> {{!RFC5280}} does not permit empty issuers, so doing so may not be interoperable with some receivers. Senders MAY use the subject field (though note the subject may be empty), as in a self-signed certificate, or instead use a short placeholder value.\n\n(Reasoning: I couldn't think of a crisp way to qualify the first sentence, and it seems unambiguously true that RFC5280 forbids it, just unclear whether it applies, so I added another clause to emphasize that we're mostly concerned about interoperability.)",
+          "createdAt": "2025-05-07T20:24:55Z",
+          "updatedAt": "2025-05-07T20:26:25Z"
         }
       ]
     },
@@ -185,16 +234,24 @@
       "id": "I_kwDOM9--mM6roNtA",
       "title": "Rename unsigned to... something",
       "url": "https://github.com/davidben/x509-alg-none/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "davidben",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "There's some chatter on LAMPS about a better name instead of \"unsigned certificates\". Filing this to remember there's a decision point here.",
       "createdAt": "2025-02-25T20:01:28Z",
-      "updatedAt": "2025-02-25T20:01:28Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-05-06T18:38:44Z",
+      "closedAt": "2025-05-06T18:38:43Z",
+      "comments": [
+        {
+          "author": "davidben",
+          "authorAssociation": "OWNER",
+          "body": "Sounds like things have largely settled on \"unsigned\". Closing this until some other thoughts crop up.",
+          "createdAt": "2025-05-06T18:38:43Z",
+          "updatedAt": "2025-05-06T18:38:43Z"
+        }
+      ]
     },
     {
       "number": 7,
@@ -227,24 +284,26 @@
       "id": "PR_kwDOM9--mM6MWSy8",
       "title": "subtle change to the intent of the OID",
       "url": "https://github.com/davidben/x509-alg-none/pull/4",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "frumioj",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I feel like it's not so much on what the consumer should do, but more about what the sender is indicating - \"I didn't sign this because I'm not expecting you to validate my signature\" (or \"Too Long, Didn't Send\"?)",
       "createdAt": "2025-02-24T20:25:06Z",
-      "updatedAt": "2025-03-20T07:42:53Z",
+      "updatedAt": "2025-05-07T22:44:54Z",
       "baseRepository": "davidben/x509-alg-none",
       "baseRefName": "main",
       "baseRefOid": "7d8b64eeaab6a8ea1be29f560cabd9b26871da21",
       "headRepository": "frumioj/x509-alg-none",
       "headRefName": "patch-1",
       "headRefOid": "e770f21d66ef4c5c6abefbe3744d4b2457d20609",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-05-06T18:37:08Z",
+      "mergedAt": "2025-05-06T18:37:08Z",
+      "mergedBy": "davidben",
+      "mergeCommit": {
+        "oid": "743b6e81c8b5002523e46bb1347b1dc408f05422"
+      },
       "comments": [
         {
           "author": "davidben",
@@ -252,6 +311,20 @@
           "body": "Ah whoops, I forgot that one of the consequences of waiting to do the draft-ietf version first is that now we have a merge conflict. :-( Do you mind rebasing and updating? Thanks!",
           "createdAt": "2025-03-20T07:42:53Z",
           "updatedAt": "2025-03-20T07:42:53Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "OWNER",
+          "body": "(Figured out how to merge this without rebasing the PR.)",
+          "createdAt": "2025-05-06T18:37:20Z",
+          "updatedAt": "2025-05-06T18:37:20Z"
+        },
+        {
+          "author": "frumioj",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks for figuring this out @davidben since I clearly didn't get a chance to rebase/update!",
+          "createdAt": "2025-05-07T22:44:52Z",
+          "updatedAt": "2025-05-07T22:44:52Z"
         }
       ],
       "reviews": [
