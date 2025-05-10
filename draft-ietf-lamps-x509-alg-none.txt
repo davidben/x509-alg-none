@@ -4,8 +4,8 @@
 
 Limited Additional Mechanisms for PKIX and SMIME             D. Benjamin
 Internet-Draft                                                Google LLC
-Intended status: Standards Track                              8 May 2025
-Expires: 9 November 2025
+Intended status: Standards Track                             10 May 2025
+Expires: 11 November 2025
 
 
                       Unsigned X.509 Certificates
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 November 2025.
+   This Internet-Draft will expire on 11 November 2025.
 
 Copyright Notice
 
@@ -143,7 +143,7 @@ Table of Contents
    This document defines the id-alg-unsigned object identifier (OID)
    under the OID arc defined in [RFC8411]:
 
-     id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 TBD}
+     id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 36}
 
    To construct an unsigned X.509 certificate, the sender MUST set the
    Certificate's signatureAlgorithm and TBSCertificate's signature
@@ -212,7 +212,7 @@ Table of Contents
                 +=========+=================+============+
                 | Decimal | Description     | References |
                 +=========+=================+============+
-                | TBD     | id-alg-unsigned | [this-RFC] |
+                | 36      | id-alg-unsigned | [this-RFC] |
                 +---------+-----------------+------------+
 
                                  Table 1
