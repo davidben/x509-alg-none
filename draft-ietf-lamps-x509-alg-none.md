@@ -103,7 +103,7 @@ This document defines the id-alg-unsigned object identifier (OID) under the OID 
 defined in {{!RFC8411}}:
 
 ~~~
-  id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 TBD}
+  id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 36}
 ~~~
 
 To construct an unsigned X.509 certificate, the sender MUST set the
@@ -165,7 +165,7 @@ IANA is requested to add the following entry to the
 
 | Decimal | Description     | References |
 |---------|-----------------|------------|
-| TBD     | id-alg-unsigned | [this-RFC] |
+| 36      | id-alg-unsigned | [this-RFC] |
 
 --- back
 
