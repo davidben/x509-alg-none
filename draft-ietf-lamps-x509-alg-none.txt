@@ -4,8 +4,8 @@
 
 Limited Additional Mechanisms for PKIX and SMIME             D. Benjamin
 Internet-Draft                                                Google LLC
-Intended status: Standards Track                             10 May 2025
-Expires: 11 November 2025
+Intended status: Standards Track                             15 May 2025
+Expires: 16 November 2025
 
 
                       Unsigned X.509 Certificates
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 November 2025.
+   This Internet-Draft will expire on 16 November 2025.
 
 Copyright Notice
 
@@ -158,10 +158,19 @@ Table of Contents
    This document does not mandate particular values but gives general
    guidance: Senders SHOULD omit issuerUniqueID, authority key
    identifier, and issuer alternative name, unless needed for
-   compatibility with existing applications.  [RFC5280] does not permit
-   empty issuers.  Senders MAY use the subject field (if the subject is
-   not empty), as in a self-signed certificate, or instead use a short
-   placeholder value.
+   compatibility with existing applications.
+
+   Section 4.1.2.4 of [RFC5280] does not permit empty issuers, so such a
+   value may not be interoperable with existing applications.  Senders
+   MAY use the subject field (if the subject is not empty), as in a
+   self-signed certificate.
+
+   Senders MAY alternatively use a short placeholder issuer consisting
+   of a single relative distinguished name, with a single attribute of
+   type id-alg-unusigned and value a zero-length UTF8String.  This
+   placeholder name, in the string representation of [RFC2253], is:
+
+   1.3.6.1.5.5.7.6.36=
 
 4.  Consuming Unsigned Certificates
 
@@ -250,6 +259,11 @@ Table of Contents
    [JWT]      Sanderson, J., "How Many Days Has It Been Since a JWT
               alg:none Vulnerability?", 9 October 2024,
               <https://www.howmanydayssinceajwtalgnonevuln.com/>.
+
+   [RFC2253]  Wahl, M., Kille, S., and T. Howes, "Lightweight Directory
+              Access Protocol (v3): UTF-8 String Representation of
+              Distinguished Names", RFC 2253, DOI 10.17487/RFC2253,
+              December 1997, <https://www.rfc-editor.org/rfc/rfc2253>.
 
    [RFC4158]  Cooper, M., Dzambasow, Y., Hesse, P., Joseph, S., and R.
               Nicholas, "Internet X.509 Public Key Infrastructure:
