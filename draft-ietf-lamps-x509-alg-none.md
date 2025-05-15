@@ -117,9 +117,20 @@ the issuer and issuerUniqueID fields and the authority key identifier and issuer
 alternative name extensions. This document does not mandate particular values
 but gives general guidance: Senders SHOULD omit issuerUniqueID, authority key
 identifier, and issuer alternative name, unless needed for compatibility with
-existing applications. {{!RFC5280}} does not permit empty issuers. Senders MAY
-use the subject field (if the subject is not empty), as in a self-signed
-certificate, or instead use a short placeholder value.
+existing applications.
+
+{{Section 4.1.2.4 of !RFC5280}} does not permit empty issuers, so such a value
+may not be interoperable with existing applications. Senders MAY use the subject
+field (if the subject is not empty), as in a self-signed certificate.
+
+Senders MAY alternatively use a short placeholder issuer consisting of a single
+relative distinguished name, with a single attribute of type id-alg-unusigned and
+value a zero-length UTF8String. This placeholder name, in the string
+representation of {{?RFC2253}}, is:
+
+~~~
+1.3.6.1.5.5.7.6.36=
+~~~
 
 # Consuming Unsigned Certificates
 
