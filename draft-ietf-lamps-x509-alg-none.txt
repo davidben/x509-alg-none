@@ -4,8 +4,8 @@
 
 Limited Additional Mechanisms for PKIX and SMIME             D. Benjamin
 Internet-Draft                                                Google LLC
-Intended status: Standards Track                             15 May 2025
-Expires: 16 November 2025
+Intended status: Standards Track                             17 May 2025
+Expires: 18 November 2025
 
 
                       Unsigned X.509 Certificates
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 November 2025.
+   This Internet-Draft will expire on 18 November 2025.
 
 Copyright Notice
 
@@ -167,7 +167,7 @@ Table of Contents
 
    Senders MAY alternatively use a short placeholder issuer consisting
    of a single relative distinguished name, with a single attribute of
-   type id-alg-unusigned and value a zero-length UTF8String.  This
+   type id-alg-unsigned and value a zero-length UTF8String.  This
    placeholder name, in the string representation of [RFC2253], is:
 
    1.3.6.1.5.5.7.6.36=
