@@ -124,7 +124,7 @@ may not be interoperable with existing applications. Senders MAY use the subject
 field (if the subject is not empty), as in a self-signed certificate.
 
 Senders MAY alternatively use a short placeholder issuer consisting of a single
-relative distinguished name, with a single attribute of type id-alg-unusigned and
+relative distinguished name, with a single attribute of type id-alg-unsigned and
 value a zero-length UTF8String. This placeholder name, in the string
 representation of {{?RFC2253}}, is:
 
