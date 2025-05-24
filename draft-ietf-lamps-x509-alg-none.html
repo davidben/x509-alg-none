@@ -22,7 +22,7 @@ signature.
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.0
-    platformdirs 4.3.7
+    platformdirs 4.3.8
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Benjamin</td>
-<td class="center">Expires 18 November 2025</td>
+<td class="center">Expires 25 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-x509-alg-none-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-17" class="published">17 May 2025</time>
+<time datetime="2025-05-24" class="published">24 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-18">18 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-25">25 November 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ signature.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 18 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1179,10 +1179,13 @@ signature.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-asn1-module" class="internal xref">ASN.1 Module</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1264,8 +1267,8 @@ defined in <span>[<a href="#RFC8411" class="cite xref">RFC8411</a>]</span>:<a hr
 <p id="section-3-3">To construct an unsigned X.509 certificate, the sender MUST set the
 Certificate's signatureAlgorithm and TBSCertificate's signature fields each to
 an AlgorithmIdentifier with algorithm id-alg-unsigned. The parameters for
-id-alg-unsigned MUST be present and MUST be encoded as NULL. The
-Certificate's signatureValue field MUST be a BIT STRING of length zero.<a href="#section-3-3" class="pilcrow">¶</a></p>
+id-alg-unsigned MUST be omitted. The Certificate's signatureValue field MUST be
+a BIT STRING of length zero.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <p id="section-3-4">An unsigned certificate has no issuer, so there are no meaningful values to use for
 the issuer and issuerUniqueID fields and the authority key identifier and issuer
 alternative name extensions. This document does not mandate particular values
@@ -1333,10 +1336,28 @@ signature risk of vulnerabilities analogous to <span>[<a href="#JWT" class="cite
       <h2 id="name-iana-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-6-1">IANA is requested to add the following entry to the
-"SMI Security for PKIX Algorithms" registry <span>[<a href="#RFC7299" class="cite xref">RFC7299</a>]</span>:<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">IANA is requested to create the following entry in the SMI Security for PKIX Module Identifier registry, defined by <span>[<a href="#RFC7299" class="cite xref">RFC7299</a>]</span>:<a href="#section-6-1" class="pilcrow">¶</a></p>
 <table class="center" id="table-1">
         <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">Decimal</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+            <th class="text-left" rowspan="1" colspan="1">References</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">TBD</td>
+            <td class="text-left" rowspan="1" colspan="1">id-mod-algUnsigned-2025</td>
+            <td class="text-left" rowspan="1" colspan="1">[this-RFC]</td>
+          </tr>
+        </tbody>
+      </table>
+<p id="section-6-3">IANA is requested to add the following entry to the
+"SMI Security for PKIX Algorithms" registry <span>[<a href="#RFC7299" class="cite xref">RFC7299</a>]</span>:<a href="#section-6-3" class="pilcrow">¶</a></p>
+<table class="center" id="table-2">
+        <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Decimal</th>
@@ -1419,18 +1440,56 @@ signature risk of vulnerabilities analogous to <span>[<a href="#JWT" class="cite
 </div>
 </section>
 </div>
-<div id="acknowledgements">
+<div id="asn1-module">
 <section id="appendix-A">
+      <h2 id="name-asn1-module">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-asn1-module" class="section-name selfRef">ASN.1 Module</a>
+      </h2>
+<div class="alignLeft art-text artwork" id="appendix-A-1">
+<pre>
+SignatureAlgorithmNone
+  { iso(1) identified-organization(3) dod(6) internet(1)
+    security(5) mechanisms(5) pkix(7) id-mod(0)
+    id-mod-algUnsigned-2025(TBD) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+IMPORTS
+  SIGNATURE-ALGORITHM
+  FROM AlgorithmInformation-2009  -- in [RFC5912]
+    { iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) id-mod(0)
+      id-mod-algorithmInformation-02(58) } ;
+
+-- Unsigned Signature Algorithm
+
+id-alg-unsigned OBJECT IDENTIFIER ::= { iso(1)
+   identified-organization(3) dod(6) internet(1) security(5)
+   mechanisms(5) pkix(7) alg(6) 36 }
+
+sa-unsigned SIGNATURE-ALGORITHM ::= {
+   IDENTIFIER id-alg-unsigned
+   PARAMS ARE absent
+}
+
+END
+</pre><a href="#appendix-A-1" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="acknowledgements">
+<section id="appendix-B">
       <h2 id="name-acknowledgements">
 <a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="appendix-A-1">Thanks to Bob Beck, Nick Harper, and Sophie Schmieg for reviewing an early
+<p id="appendix-B-1">Thanks to Bob Beck, Nick Harper, and Sophie Schmieg for reviewing an early
 iteration of this document. Thanks to Alex Gaynor for providing a link to cite
-for <span>[<a href="#JWT" class="cite xref">JWT</a>]</span>. Thanks to Russ Housley for additional input.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+for <span>[<a href="#JWT" class="cite xref">JWT</a>]</span>. Thanks to Russ Housley for additional input.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-B">
+<section id="appendix-C">
       <h2 id="name-authors-address">
 <a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
       </h2>
