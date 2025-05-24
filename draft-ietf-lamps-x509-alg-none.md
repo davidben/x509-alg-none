@@ -109,8 +109,8 @@ defined in {{!RFC8411}}:
 To construct an unsigned X.509 certificate, the sender MUST set the
 Certificate's signatureAlgorithm and TBSCertificate's signature fields each to
 an AlgorithmIdentifier with algorithm id-alg-unsigned. The parameters for
-id-alg-unsigned MUST be present and MUST be encoded as NULL. The
-Certificate's signatureValue field MUST be a BIT STRING of length zero.
+id-alg-unsigned MUST be omitted. The Certificate's signatureValue field MUST be
+a BIT STRING of length zero.
 
 An unsigned certificate has no issuer, so there are no meaningful values to use for
 the issuer and issuerUniqueID fields and the authority key identifier and issuer
