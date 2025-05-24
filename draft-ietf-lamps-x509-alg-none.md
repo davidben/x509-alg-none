@@ -171,6 +171,12 @@ signature risk of vulnerabilities analogous to {{JWT}}.
 
 # IANA Considerations
 
+IANA is requested to create the following entry in the SMI Security for PKIX Module Identifier registry, defined by {{!RFC7299}}:
+
+| Decimal | Description             | References |
+|---------|-------------------------|------------|
+| TBD     | id-mod-algUnsigned-2025 | [this-RFC] |
+
 IANA is requested to add the following entry to the
 "SMI Security for PKIX Algorithms" registry {{!RFC7299}}:
 
@@ -179,6 +185,38 @@ IANA is requested to add the following entry to the
 | 36      | id-alg-unsigned | [this-RFC] |
 
 --- back
+
+# ASN.1 Module
+
+~~~
+SignatureAlgorithmNone
+  { iso(1) identified-organization(3) dod(6) internet(1)
+    security(5) mechanisms(5) pkix(7) id-mod(0)
+    id-mod-algUnsigned-2025(TBD) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+IMPORTS
+  SIGNATURE-ALGORITHM
+  FROM AlgorithmInformation-2009  -- in [RFC5912]
+    { iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) id-mod(0)
+      id-mod-algorithmInformation-02(58) } ;
+
+-- Unsigned Signature Algorithm
+
+id-alg-unsigned OBJECT IDENTIFIER ::= { iso(1)
+   identified-organization(3) dod(6) internet(1) security(5)
+   mechanisms(5) pkix(7) alg(6) 36 }
+
+sa-unsigned SIGNATURE-ALGORITHM ::= {
+   IDENTIFIER id-alg-unsigned
+   PARAMS ARE absent
+}
+
+END
+~~~
 
 # Acknowledgements
 {:numbered="false"}
