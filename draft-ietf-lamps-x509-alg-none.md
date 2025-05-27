@@ -48,8 +48,8 @@ signature.
 # Introduction
 
 An X.509 certificate {{!RFC5280}} relates two entities in the PKI: information
-about a subject and a proof from an issuer. Viewing the PKI as a graph of
-with entities as nodes, as in {{?RFC4158}}, a certificate is an edge between the
+about a subject and a proof from an issuer. Viewing the PKI as a graph with
+entities as nodes, as in {{?RFC4158}}, a certificate is an edge between the
 subject and issuer.
 
 In some contexts, an application needs standalone subject information instead of
