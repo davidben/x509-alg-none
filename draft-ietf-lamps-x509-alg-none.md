@@ -36,6 +36,7 @@ informative:
     -
       ins: "J. Sanderson"
       name: "James 'zofrex' Sanderson"
+...
 
 --- abstract
 
