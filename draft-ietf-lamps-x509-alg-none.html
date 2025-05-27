@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Benjamin</td>
-<td class="center">Expires 25 November 2025</td>
+<td class="center">Expires 28 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-x509-alg-none-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-24" class="published">24 May 2025</time>
+<time datetime="2025-05-27" class="published">27 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-25">25 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-28">28 November 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ signature.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 28 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1208,37 +1208,38 @@ trusts this trust anchor information out-of-band and does not require an
 issuer's signature.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">X.509 does not define a structure for this scenario. Instead, X.509 trust
 anchors are often represented with "self-signed" certificates, where the
-subject's key signs over itself. Other formats, such as <span>[<a href="#RFC5914" class="cite xref">RFC5914</a>]</span> exist to convey trust anchors, but
-self-signed certificates remain widely used. Additionally, some TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>
-server deployments use self-signed certificates when they do not intend to
-present a CA-issued identity, instead expecting the relying party to
-authenticate the certificate out-of-band, e.g. via a known fingerprint.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">These self-signatures typically have no security value, aren't checked by
+subject's key signs over itself. Other formats, such as <span>[<a href="#RFC5914" class="cite xref">RFC5914</a>]</span> exist to
+convey trust anchors, but self-signed certificates remain widely used.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">Additionally, some TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> server deployments use self-signed
+end entity certificates when they do not intend to present a CA-issued
+identity, instead expecting the relying party to authenticate the certificate
+out-of-band, e.g. via a known fingerprint.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">These self-signatures typically have no security value, aren't checked by
 the receiver, and only serve as placeholders to meet syntactic requirements of
-an X.509 certificate.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">Computing signatures as placeholders has some drawbacks:<a href="#section-1-5" class="pilcrow">¶</a></p>
+an X.509 certificate.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">Computing signatures as placeholders has some drawbacks:<a href="#section-1-6" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1-6.1">
-          <p id="section-1-6.1.1">Post-quantum signature algorithms are large, so including a self-signature
-significantly increases the size of the payload.<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-1-7.1">
+          <p id="section-1-7.1.1">Post-quantum signature algorithms are large, so including a self-signature
+significantly increases the size of the payload.<a href="#section-1-7.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-6.2">
-          <p id="section-1-6.2.1">If the subject is an end entity, rather than a CA, computing an X.509
-signature risks cross-protocol attacks with the intended use of the key.<a href="#section-1-6.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-7.2">
+          <p id="section-1-7.2.1">If the subject is an end entity, rather than a CA, computing an X.509
+signature risks cross-protocol attacks with the intended use of the key.<a href="#section-1-7.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-6.3">
-          <p id="section-1-6.3.1">It is ambiguous whether such a self-signature requires the CA bit in basic
+        <li class="normal" id="section-1-7.3">
+          <p id="section-1-7.3.1">It is ambiguous whether such a self-signature requires the CA bit in basic
 constraints or keyCertSign in key usage. If the key is intended for a
-non-X.509 use, asserting those capabilities is an unnecessary risk.<a href="#section-1-6.3.1" class="pilcrow">¶</a></p>
+non-X.509 use, asserting those capabilities is an unnecessary risk.<a href="#section-1-7.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-6.4">
-          <p id="section-1-6.4.1">If end entity's key is not a signing key (e.g. a KEM key), there is no valid
-signature algorithm to use with the key.<a href="#section-1-6.4.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-7.4">
+          <p id="section-1-7.4.1">If the subject is an end entity, and the end entity's key is not a signing
+key (e.g. a KEM key), there is no valid signature algorithm to use with the key.<a href="#section-1-7.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-7">This document defines a profile for unsigned X.509 certificates, which may be
+<p id="section-1-8">This document defines a profile for unsigned X.509 certificates, which may be
 used when the certificate is used as a container for subject information,
-without any specific issuer.<a href="#section-1-7" class="pilcrow">¶</a></p>
+without any specific issuer.<a href="#section-1-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">

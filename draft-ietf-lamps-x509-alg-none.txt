@@ -4,8 +4,8 @@
 
 Limited Additional Mechanisms for PKIX and SMIME             D. Benjamin
 Internet-Draft                                                Google LLC
-Intended status: Standards Track                             24 May 2025
-Expires: 25 November 2025
+Intended status: Standards Track                             27 May 2025
+Expires: 28 November 2025
 
 
                       Unsigned X.509 Certificates
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 November 2025.
+   This Internet-Draft will expire on 28 November 2025.
 
 Copyright Notice
 
@@ -100,11 +100,12 @@ Table of Contents
    trust anchors are often represented with "self-signed" certificates,
    where the subject's key signs over itself.  Other formats, such as
    [RFC5914] exist to convey trust anchors, but self-signed certificates
-   remain widely used.  Additionally, some TLS [RFC8446] server
-   deployments use self-signed certificates when they do not intend to
-   present a CA-issued identity, instead expecting the relying party to
-   authenticate the certificate out-of-band, e.g. via a known
-   fingerprint.
+   remain widely used.
+
+   Additionally, some TLS [RFC8446] server deployments use self-signed
+   end entity certificates when they do not intend to present a CA-
+   issued identity, instead expecting the relying party to authenticate
+   the certificate out-of-band, e.g. via a known fingerprint.
 
    These self-signatures typically have no security value, aren't
    checked by the receiver, and only serve as placeholders to meet
@@ -124,8 +125,9 @@ Table of Contents
       intended for a non-X.509 use, asserting those capabilities is an
       unnecessary risk.
 
-   *  If end entity's key is not a signing key (e.g. a KEM key), there
-      is no valid signature algorithm to use with the key.
+   *  If the subject is an end entity, and the end entity's key is not a
+      signing key (e.g. a KEM key), there is no valid signature
+      algorithm to use with the key.
 
    This document defines a profile for unsigned X.509 certificates,
    which may be used when the certificate is used as a container for
