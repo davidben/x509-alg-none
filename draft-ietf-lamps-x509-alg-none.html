@@ -1061,6 +1061,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="workgroup">Limited Additional Mechanisms for PKIX and SMIME</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
 <dd class="internet-draft">draft-ietf-lamps-x509-alg-none-latest</dd>
+<dt class="label-updates">Updates:</dt>
+<dd class="updates">
+<a href="https://www.rfc-editor.org/rfc/rfc5280" class="eref">5280</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
 <time datetime="2025-05-27" class="published">27 May 2025</time>
@@ -1270,24 +1273,63 @@ Certificate's signatureAlgorithm and TBSCertificate's signature fields each to
 an AlgorithmIdentifier with algorithm id-alg-unsigned. The parameters for
 id-alg-unsigned MUST be omitted. The Certificate's signatureValue field MUST be
 a BIT STRING of length zero.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">An unsigned certificate has no issuer, so there are no meaningful values to use for
-the issuer and issuerUniqueID fields and the authority key identifier and issuer
-alternative name extensions. This document does not mandate particular values
-but gives general guidance: Senders SHOULD omit issuerUniqueID, authority key
-identifier, and issuer alternative name, unless needed for compatibility with
-existing applications.<a href="#section-3-4" class="pilcrow">¶</a></p>
-<p id="section-3-5"><span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.1.2.4" class="relref">Section 4.1.2.4</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> does not permit empty issuers, so such a value
-may not be interoperable with existing applications. Senders MAY use the subject
-field (if the subject is not empty), as in a self-signed certificate.<a href="#section-3-5" class="pilcrow">¶</a></p>
-<p id="section-3-6">Senders MAY alternatively use a short placeholder issuer consisting of a single
+<p id="section-3-4">An unsigned certificate takes the place of a self-signed certificate in
+scenarios where the application only requires subject information. It has no
+issuer, so some requirements in the profile defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> cannot
+meaningfully be applied. However, the application may have pre-existing
+requirements derived from <span>[<a href="#X.509" class="cite xref">X.509</a>]</span> and <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, so senders MAY construct
+the certificate as if it were a self-signed certificate, if needed for
+interoperability.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5">In particular, the following fields describe a certificate's issuer:<a href="#section-3-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-6.1">
+          <p id="section-3-6.1.1">issuer (<span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.1.2.4" class="relref">Section 4.1.2.4</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>)<a href="#section-3-6.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-6.2">
+          <p id="section-3-6.2.1">issuerUniqueID (<span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.1.2.8" class="relref">Section 4.1.2.8</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>)<a href="#section-3-6.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-6.3">
+          <p id="section-3-6.3.1">authority key identifier (<span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.1" class="relref">Section 4.2.1.1</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>)<a href="#section-3-6.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-6.4">
+          <p id="section-3-6.4.1">issuer alternative name (<span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.7" class="relref">Section 4.2.1.7</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>)<a href="#section-3-6.4.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-3-7">The issuer field is not optional, and both <span>[<a href="#X.509" class="cite xref">X.509</a>]</span> and
+<span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.1.2.4" class="relref">Section 4.1.2.4</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> forbid empty issuers, so such a value may not be
+interoperable with existing applications.<a href="#section-3-7" class="pilcrow">¶</a></p>
+<p id="section-3-8">Senders MAY use a short placeholder issuer consisting of a single
 relative distinguished name, with a single attribute of type id-alg-unsigned and
 value a zero-length UTF8String. This placeholder name, in the string
-representation of <span>[<a href="#RFC2253" class="cite xref">RFC2253</a>]</span>, is:<a href="#section-3-6" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3-7">
+representation of <span>[<a href="#RFC2253" class="cite xref">RFC2253</a>]</span>, is:<a href="#section-3-8" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3-9">
 <pre>
 1.3.6.1.5.5.7.6.36=
-</pre><a href="#section-3-7" class="pilcrow">¶</a>
+</pre><a href="#section-3-9" class="pilcrow">¶</a>
 </div>
+<p id="section-3-10">Alternatively, if the subject is not empty, senders MAY use the subject field,
+as in a self-signed certificate. This may be useful in applications that, for
+example, expect trust anchors to have matching issuer and subject.<a href="#section-3-10" class="pilcrow">¶</a></p>
+<p id="section-3-11">Senders MUST omit the issuerUniqueID field, as it is optional, not applicable,
+and already forbidden by <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.1.2.8" class="relref">Section 4.1.2.8</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-3-11" class="pilcrow">¶</a></p>
+<p id="section-3-12">Senders SHOULD omit the authority key identifier and issuer alternative name
+extensions. <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.1" class="relref">Section 4.2.1.1</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> requires CA certificates to include
+authority key identifier, but includes an exception for self-signed certificates
+used when distributing a public key. This document updates <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> to also
+permit omitting authority key identifier in unsigned certificates.<a href="#section-3-12" class="pilcrow">¶</a></p>
+<p id="section-3-13">Some extensions reflect whether the subject is a CA or an end entity:<a href="#section-3-13" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-14.1">
+          <p id="section-3-14.1.1">key usage (<span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.3" class="relref">Section 4.2.1.3</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>)<a href="#section-3-14.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-14.2">
+          <p id="section-3-14.2.1">basic constraints (<span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.9" class="relref">Section 4.2.1.9</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>)<a href="#section-3-14.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-3-15">Senders SHOULD fill in these values to reflect the subject. In particular, an
+unsigned end entity certificate does not issue itself, so it SHOULD NOT assert
+the keyCertSign key usage bit, and it SHOULD either omit the basic constraints
+extension or set the cA boolean to FALSE.<a href="#section-3-15" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="consuming-unsigned-certificates">
@@ -1433,8 +1475,12 @@ signature risk of vulnerabilities analogous to <span>[<a href="#JWT" class="cite
 <span class="refAuthor">Housley, R.</span>, <span class="refAuthor">Ashmore, S.</span>, and <span class="refAuthor">C. Wallace</span>, <span class="refTitle">"Trust Anchor Format"</span>, <span class="seriesInfo">RFC 5914</span>, <span class="seriesInfo">DOI 10.17487/RFC5914</span>, <time datetime="2010-06" class="refDate">June 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5914">https://www.rfc-editor.org/rfc/rfc5914</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8446">[RFC8446]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="X.509">[X.509]</dt>
+      <dd>
+<span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information technology - Open Systems Interconnection – The Directory: Public-key and attribute certificate frameworks"</span>, <span class="seriesInfo">ISO/IEC 9594-8:2020 </span>, <time datetime="2019-10" class="refDate">October 2019</time>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
