@@ -6,6 +6,7 @@ docname: draft-ietf-lamps-x509-alg-none-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
+updates: 5280
 consensus: true
 v: 3
 area: "Security"
@@ -36,6 +37,15 @@ informative:
     -
       ins: "J. Sanderson"
       name: "James 'zofrex' Sanderson"
+
+  X.509:
+    title: "Information technology - Open Systems Interconnection – The Directory: Public-key and attribute certificate frameworks"
+    date: October 2019
+    author:
+      org: ITU-T
+    seriesinfo:
+      ISO/IEC 9594-8:2020
+
 ...
 
 --- abstract
@@ -115,18 +125,26 @@ an AlgorithmIdentifier with algorithm id-alg-unsigned. The parameters for
 id-alg-unsigned MUST be omitted. The Certificate's signatureValue field MUST be
 a BIT STRING of length zero.
 
-An unsigned certificate has no issuer, so there are no meaningful values to use for
-the issuer and issuerUniqueID fields and the authority key identifier and issuer
-alternative name extensions. This document does not mandate particular values
-but gives general guidance: Senders SHOULD omit issuerUniqueID, authority key
-identifier, and issuer alternative name, unless needed for compatibility with
-existing applications.
+An unsigned certificate takes the place of a self-signed certificate in
+scenarios where the application only requires subject information. It has no
+issuer, so some requirements in the profile defined in {{!RFC5280}} cannot
+meaningfully be applied. However, the application may have pre-existing
+requirements derived from {{X.509}} and {{!RFC5280}}, so senders MAY construct
+the certificate as if it were a self-signed certificate, if needed for
+interoperability.
 
-{{Section 4.1.2.4 of !RFC5280}} does not permit empty issuers, so such a value
-may not be interoperable with existing applications. Senders MAY use the subject
-field (if the subject is not empty), as in a self-signed certificate.
+In particular, the following fields describe a certificate's issuer:
 
-Senders MAY alternatively use a short placeholder issuer consisting of a single
+* issuer ({{Section 4.1.2.4 of !RFC5280}})
+* issuerUniqueID ({{Section 4.1.2.8 of !RFC5280}})
+* authority key identifier ({{Section 4.2.1.1 of !RFC5280}})
+* issuer alternative name ({{Section 4.2.1.7 of !RFC5280}})
+
+The issuer field is not optional, and both {{X.509}} and
+{{Section 4.1.2.4 of !RFC5280}} forbid empty issuers, so such a value may not be
+interoperable with existing applications.
+
+Senders MAY use a short placeholder issuer consisting of a single
 relative distinguished name, with a single attribute of type id-alg-unsigned and
 value a zero-length UTF8String. This placeholder name, in the string
 representation of {{?RFC2253}}, is:
@@ -134,6 +152,29 @@ representation of {{?RFC2253}}, is:
 ~~~
 1.3.6.1.5.5.7.6.36=
 ~~~
+
+Alternatively, if the subject is not empty, senders MAY use the subject field,
+as in a self-signed certificate. This may be useful in applications that, for
+example, expect trust anchors to have matching issuer and subject.
+
+Senders MUST omit the issuerUniqueID field, as it is optional, not applicable,
+and already forbidden by {{Section 4.1.2.8 of !RFC5280}}.
+
+Senders SHOULD omit the authority key identifier and issuer alternative name
+extensions. {{Section 4.2.1.1 of !RFC5280}} requires CA certificates to include
+authority key identifier, but includes an exception for self-signed certificates
+used when distributing a public key. This document updates {{!RFC5280}} to also
+permit omitting authority key identifier in unsigned certificates.
+
+Some extensions reflect whether the subject is a CA or an end entity:
+
+* key usage ({{Section 4.2.1.3 of !RFC5280}})
+* basic constraints ({{Section 4.2.1.9 of !RFC5280}})
+
+Senders SHOULD fill in these values to reflect the subject. In particular, an
+unsigned end entity certificate does not issue itself, so it SHOULD NOT assert
+the keyCertSign key usage bit, and it SHOULD either omit the basic constraints
+extension or set the cA boolean to FALSE.
 
 # Consuming Unsigned Certificates
 
