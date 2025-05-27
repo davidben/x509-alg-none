@@ -61,11 +61,13 @@ issuer's signature.
 
 X.509 does not define a structure for this scenario. Instead, X.509 trust
 anchors are often represented with "self-signed" certificates, where the
-subject's key signs over itself. Other formats, such as {{?RFC5914}} exist to convey trust anchors, but
-self-signed certificates remain widely used. Additionally, some TLS {{?RFC8446}}
-server deployments use self-signed certificates when they do not intend to
-present a CA-issued identity, instead expecting the relying party to
-authenticate the certificate out-of-band, e.g. via a known fingerprint.
+subject's key signs over itself. Other formats, such as {{?RFC5914}} exist to
+convey trust anchors, but self-signed certificates remain widely used.
+
+Additionally, some TLS {{?RFC8446}} server deployments use self-signed
+end entity certificates when they do not intend to present a CA-issued
+identity, instead expecting the relying party to authenticate the certificate
+out-of-band, e.g. via a known fingerprint.
 
 These self-signatures typically have no security value, aren't checked by
 the receiver, and only serve as placeholders to meet syntactic requirements of
@@ -83,8 +85,8 @@ Computing signatures as placeholders has some drawbacks:
   constraints or keyCertSign in key usage. If the key is intended for a
   non-X.509 use, asserting those capabilities is an unnecessary risk.
 
-* If end entity's key is not a signing key (e.g. a KEM key), there is no valid
-  signature algorithm to use with the key.
+* If the subject is an end entity, and the end entity's key is not a signing
+  key (e.g. a KEM key), there is no valid signature algorithm to use with the key.
 
 This document defines a profile for unsigned X.509 certificates, which may be
 used when the certificate is used as a container for subject information,
