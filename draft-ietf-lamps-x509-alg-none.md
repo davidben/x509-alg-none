@@ -161,8 +161,8 @@ Senders MUST omit the issuerUniqueID field, as it is optional, not applicable,
 and already forbidden by {{Section 4.1.2.8 of !RFC5280}}.
 
 Senders SHOULD omit the authority key identifier and issuer alternative name
-extensions. {{Section 4.2.1.1 of !RFC5280}} requires CA certificates to include
-authority key identifier, but includes an exception for self-signed certificates
+extensions. {{Section 4.2.1.1 of !RFC5280}} requires certificates to include
+the authority key identifier, but includes an exception for self-signed certificates
 used when distributing a public key. This document updates {{!RFC5280}} to also
 permit omitting authority key identifier in unsigned certificates.
 
