@@ -4,9 +4,9 @@
 
 Limited Additional Mechanisms for PKIX and SMIME             D. Benjamin
 Internet-Draft                                                Google LLC
-Updates: 5280 (if approved)                                  27 May 2025
+Updates: 5280 (if approved)                                  28 May 2025
 Intended status: Standards Track                                        
-Expires: 28 November 2025
+Expires: 29 November 2025
 
 
                       Unsigned X.509 Certificates
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 November 2025.
+   This Internet-Draft will expire on 29 November 2025.
 
 Copyright Notice
 
@@ -75,6 +75,9 @@ Table of Contents
    4.  Consuming Unsigned Certificates
    5.  Security Considerations
    6.  IANA Considerations
+     6.1.  Module Identifier
+     6.2.  Algorithm
+     6.3.  Relative Distinguished Name Attribute
    7.  References
      7.1.  Normative References
      7.2.  Informative References
@@ -144,10 +147,11 @@ Table of Contents
 
 3.  Constructing Unsigned Certificates
 
-   This document defines the id-alg-unsigned object identifier (OID)
-   under the OID arc defined in [RFC8411]:
+   This document defines the id-alg-unsigned and id-rdna-unsigned object
+   identifiers (OIDs) under the OID arcs defined in [RFC7299]:
 
      id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 36}
+     id-rdna-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 TBD1 TBD2}
 
    To construct an unsigned X.509 certificate, the sender MUST set the
    Certificate's signatureAlgorithm and TBSCertificate's signature
@@ -179,11 +183,11 @@ Table of Contents
    may not be interoperable with existing applications.
 
    Senders MAY use a short placeholder issuer consisting of a single
-   relative distinguished name, with a single attribute of type id-alg-
+   relative distinguished name, with a single attribute of type id-rdna-
    unsigned and value a zero-length UTF8String.  This placeholder name,
    in the string representation of [RFC2253], is:
 
-   1.3.6.1.5.5.7.6.36=
+   1.3.6.1.5.5.7.TBD1.TBD2=
 
    Alternatively, if the subject is not empty, senders MAY use the
    subject field, as in a self-signed certificate.  This may be useful
@@ -195,7 +199,7 @@ Table of Contents
 
    Senders SHOULD omit the authority key identifier and issuer
    alternative name extensions.  Section 4.2.1.1 of [RFC5280] requires
-   CA certificates to include authority key identifier, but includes an
+   certificates to include the authority key identifier, but includes an
    exception for self-signed certificates used when distributing a
    public key.  This document updates [RFC5280] to also permit omitting
    authority key identifier in unsigned certificates.
@@ -255,8 +259,10 @@ Table of Contents
 
 6.  IANA Considerations
 
-   IANA is requested to create the following entry in the SMI Security
-   for PKIX Module Identifier registry, defined by [RFC7299]:
+6.1.  Module Identifier
+
+   IANA is requested to add the following entry in the "SMI Security for
+   PKIX Module Identifier" registry, defined by [RFC7299]:
 
             +=========+=========================+============+
             | Decimal | Description             | References |
@@ -265,6 +271,8 @@ Table of Contents
             +---------+-------------------------+------------+
 
                                  Table 1
+
+6.2.  Algorithm
 
    IANA is requested to add the following entry to the "SMI Security for
    PKIX Algorithms" registry [RFC7299]:
@@ -277,6 +285,45 @@ Table of Contents
 
                                  Table 2
 
+6.3.  Relative Distinguished Name Attribute
+
+   To allocate id-rdna-unsigned, this document introduces a new PKIX OID
+   arc for relative distinguished name attributes:
+
+   IANA is requested to add the following entry to the "SMI Security for
+   PKIX" registry [RFC7299]:
+
+     +=========+=======================================+============+
+     | Decimal | Description                           | References |
+     +=========+=======================================+============+
+     | TBD1    | Relative Distinguished Name Attribute | [this-RFC] |
+     +---------+---------------------------------------+------------+
+
+                                 Table 3
+
+   IANA is requested to create the "SMI Security for PKIX Relative
+   Distinguished Name Attribute" registry within the "Structure of
+   Management Information (SMI) Numbers (MIB Module Registrations)"
+   group.
+
+   The new registry's description is
+   "iso.org.dod.internet.security.mechanisms.pkix.rdna
+   (1.3.6.1.5.5.7.TBD1)".
+
+   The new registry has three columns and is initialized with the
+   following values:
+
+                +=========+==================+============+
+                | Decimal | Description      | References |
+                +=========+==================+============+
+                | TBD2    | id-rdna-unsigned | [this-RFC] |
+                +---------+------------------+------------+
+
+                                  Table 4
+
+   Future updates to this table are to be made according to the
+   Specification Required policy as defined in [RFC5226].
+
 7.  References
 
 7.1.  Normative References
@@ -285,6 +332,11 @@ Table of Contents
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC5226]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
+              IANA Considerations Section in RFCs", RFC 5226,
+              DOI 10.17487/RFC5226, May 2008,
+              <https://www.rfc-editor.org/rfc/rfc5226>.
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
@@ -299,11 +351,6 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
-
-   [RFC8411]  Schaad, J. and R. Andrews, "IANA Registration for the
-              Cryptographic Algorithm Object Identifier Range",
-              RFC 8411, DOI 10.17487/RFC8411, August 2018,
-              <https://www.rfc-editor.org/rfc/rfc8411>.
 
 7.2.  Informative References
 

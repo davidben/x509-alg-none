@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Benjamin</td>
-<td class="center">Expires 28 November 2025</td>
+<td class="center">Expires 29 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc5280" class="eref">5280</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-27" class="published">27 May 2025</time>
+<time datetime="2025-05-28" class="published">28 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-28">28 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-29">29 November 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1123,7 +1123,7 @@ signature.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 29 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1169,6 +1169,17 @@ signature.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-module-identifier" class="internal xref">Module Identifier</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-algorithm" class="internal xref">Algorithm</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-relative-distinguished-name" class="internal xref">Relative Distinguished Name Attribute</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-references" class="internal xref">References</a></p>
@@ -1261,11 +1272,12 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
       <h2 id="name-constructing-unsigned-certi">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-constructing-unsigned-certi" class="section-name selfRef">Constructing Unsigned Certificates</a>
       </h2>
-<p id="section-3-1">This document defines the id-alg-unsigned object identifier (OID) under the OID arc
-defined in <span>[<a href="#RFC8411" class="cite xref">RFC8411</a>]</span>:<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">This document defines the id-alg-unsigned and id-rdna-unsigned object
+identifiers (OIDs) under the OID arcs defined in <span>[<a href="#RFC7299" class="cite xref">RFC7299</a>]</span>:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-2">
 <pre>
   id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 36}
+  id-rdna-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 TBD1 TBD2}
 </pre><a href="#section-3-2" class="pilcrow">¶</a>
 </div>
 <p id="section-3-3">To construct an unsigned X.509 certificate, the sender MUST set the
@@ -1299,12 +1311,12 @@ interoperability.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.1.2.4" class="relref">Section 4.1.2.4</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> forbid empty issuers, so such a value may not be
 interoperable with existing applications.<a href="#section-3-7" class="pilcrow">¶</a></p>
 <p id="section-3-8">Senders MAY use a short placeholder issuer consisting of a single
-relative distinguished name, with a single attribute of type id-alg-unsigned and
+relative distinguished name, with a single attribute of type id-rdna-unsigned and
 value a zero-length UTF8String. This placeholder name, in the string
 representation of <span>[<a href="#RFC2253" class="cite xref">RFC2253</a>]</span>, is:<a href="#section-3-8" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-9">
 <pre>
-1.3.6.1.5.5.7.6.36=
+1.3.6.1.5.5.7.TBD1.TBD2=
 </pre><a href="#section-3-9" class="pilcrow">¶</a>
 </div>
 <p id="section-3-10">Alternatively, if the subject is not empty, senders MAY use the subject field,
@@ -1313,8 +1325,8 @@ example, expect trust anchors to have matching issuer and subject.<a href="#sect
 <p id="section-3-11">Senders MUST omit the issuerUniqueID field, as it is optional, not applicable,
 and already forbidden by <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.1.2.8" class="relref">Section 4.1.2.8</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-3-11" class="pilcrow">¶</a></p>
 <p id="section-3-12">Senders SHOULD omit the authority key identifier and issuer alternative name
-extensions. <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.1" class="relref">Section 4.2.1.1</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> requires CA certificates to include
-authority key identifier, but includes an exception for self-signed certificates
+extensions. <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.1" class="relref">Section 4.2.1.1</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> requires certificates to include
+the authority key identifier, but includes an exception for self-signed certificates
 used when distributing a public key. This document updates <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> to also
 permit omitting authority key identifier in unsigned certificates.<a href="#section-3-12" class="pilcrow">¶</a></p>
 <p id="section-3-13">Some extensions reflect whether the subject is a CA or an end entity:<a href="#section-3-13" class="pilcrow">¶</a></p>
@@ -1379,43 +1391,111 @@ signature risk of vulnerabilities analogous to <span>[<a href="#JWT" class="cite
       <h2 id="name-iana-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-6-1">IANA is requested to create the following entry in the SMI Security for PKIX Module Identifier registry, defined by <span>[<a href="#RFC7299" class="cite xref">RFC7299</a>]</span>:<a href="#section-6-1" class="pilcrow">¶</a></p>
+<div id="module-identifier">
+<section id="section-6.1">
+        <h3 id="name-module-identifier">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-module-identifier" class="section-name selfRef">Module Identifier</a>
+        </h3>
+<p id="section-6.1-1">IANA is requested to add the following entry in the "SMI Security for PKIX
+Module Identifier" registry, defined by <span>[<a href="#RFC7299" class="cite xref">RFC7299</a>]</span>:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <table class="center" id="table-1">
-        <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
+          <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
 <thead>
-          <tr>
-            <th class="text-left" rowspan="1" colspan="1">Decimal</th>
-            <th class="text-left" rowspan="1" colspan="1">Description</th>
-            <th class="text-left" rowspan="1" colspan="1">References</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">TBD</td>
-            <td class="text-left" rowspan="1" colspan="1">id-mod-algUnsigned-2025</td>
-            <td class="text-left" rowspan="1" colspan="1">[this-RFC]</td>
-          </tr>
-        </tbody>
-      </table>
-<p id="section-6-3">IANA is requested to add the following entry to the
-"SMI Security for PKIX Algorithms" registry <span>[<a href="#RFC7299" class="cite xref">RFC7299</a>]</span>:<a href="#section-6-3" class="pilcrow">¶</a></p>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Decimal</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">References</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">TBD</td>
+              <td class="text-left" rowspan="1" colspan="1">id-mod-algUnsigned-2025</td>
+              <td class="text-left" rowspan="1" colspan="1">[this-RFC]</td>
+            </tr>
+          </tbody>
+        </table>
+</section>
+</div>
+<div id="algorithm">
+<section id="section-6.2">
+        <h3 id="name-algorithm">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-algorithm" class="section-name selfRef">Algorithm</a>
+        </h3>
+<p id="section-6.2-1">IANA is requested to add the following entry to the
+"SMI Security for PKIX Algorithms" registry <span>[<a href="#RFC7299" class="cite xref">RFC7299</a>]</span>:<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <table class="center" id="table-2">
-        <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
+          <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
 <thead>
-          <tr>
-            <th class="text-left" rowspan="1" colspan="1">Decimal</th>
-            <th class="text-left" rowspan="1" colspan="1">Description</th>
-            <th class="text-left" rowspan="1" colspan="1">References</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">36</td>
-            <td class="text-left" rowspan="1" colspan="1">id-alg-unsigned</td>
-            <td class="text-left" rowspan="1" colspan="1">[this-RFC]</td>
-          </tr>
-        </tbody>
-      </table>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Decimal</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">References</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">36</td>
+              <td class="text-left" rowspan="1" colspan="1">id-alg-unsigned</td>
+              <td class="text-left" rowspan="1" colspan="1">[this-RFC]</td>
+            </tr>
+          </tbody>
+        </table>
+</section>
+</div>
+<div id="relative-distinguished-name-attribute">
+<section id="section-6.3">
+        <h3 id="name-relative-distinguished-name">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-relative-distinguished-name" class="section-name selfRef">Relative Distinguished Name Attribute</a>
+        </h3>
+<p id="section-6.3-1">To allocate id-rdna-unsigned, this document introduces a new PKIX OID arc for
+relative distinguished name attributes:<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">IANA is requested to add the following entry to the "SMI Security for PKIX"
+registry <span>[<a href="#RFC7299" class="cite xref">RFC7299</a>]</span>:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+<table class="center" id="table-3">
+          <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Decimal</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">References</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">TBD1</td>
+              <td class="text-left" rowspan="1" colspan="1">Relative Distinguished Name Attribute</td>
+              <td class="text-left" rowspan="1" colspan="1">[this-RFC]</td>
+            </tr>
+          </tbody>
+        </table>
+<p id="section-6.3-4">IANA is requested to create the "SMI Security for PKIX Relative Distinguished
+Name Attribute" registry within the "Structure of Management Information (SMI)
+Numbers (MIB Module Registrations)" group.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
+<p id="section-6.3-5">The new registry's description is
+"iso.org.dod.internet.security.mechanisms.pkix.rdna (1.3.6.1.5.5.7.TBD1)".<a href="#section-6.3-5" class="pilcrow">¶</a></p>
+<p id="section-6.3-6">The new registry has three columns and is initialized with the following values:<a href="#section-6.3-6" class="pilcrow">¶</a></p>
+<table class="center" id="table-4">
+          <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Decimal</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">References</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">TBD2</td>
+              <td class="text-left" rowspan="1" colspan="1">id-rdna-unsigned</td>
+              <td class="text-left" rowspan="1" colspan="1">[this-RFC]</td>
+            </tr>
+          </tbody>
+        </table>
+<p id="section-6.3-8">Future updates to this table are to be made according to the Specification
+Required policy as defined in <span>[<a href="#RFC5226" class="cite xref">RFC5226</a>]</span>.<a href="#section-6.3-8" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -1433,6 +1513,10 @@ signature risk of vulnerabilities analogous to <span>[<a href="#JWT" class="cite
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC5226">[RFC5226]</dt>
+        <dd>
+<span class="refAuthor">Narten, T.</span> and <span class="refAuthor">H. Alvestrand</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">RFC 5226</span>, <span class="seriesInfo">DOI 10.17487/RFC5226</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5226">https://www.rfc-editor.org/rfc/rfc5226</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC5280">[RFC5280]</dt>
         <dd>
 <span class="refAuthor">Cooper, D.</span>, <span class="refAuthor">Santesson, S.</span>, <span class="refAuthor">Farrell, S.</span>, <span class="refAuthor">Boeyen, S.</span>, <span class="refAuthor">Housley, R.</span>, and <span class="refAuthor">W. Polk</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile"</span>, <span class="seriesInfo">RFC 5280</span>, <span class="seriesInfo">DOI 10.17487/RFC5280</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5280">https://www.rfc-editor.org/rfc/rfc5280</a>&gt;</span>. </dd>
@@ -1442,12 +1526,8 @@ signature risk of vulnerabilities analogous to <span>[<a href="#JWT" class="cite
 <span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Object Identifier Registry for the PKIX Working Group"</span>, <span class="seriesInfo">RFC 7299</span>, <span class="seriesInfo">DOI 10.17487/RFC7299</span>, <time datetime="2014-07" class="refDate">July 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7299">https://www.rfc-editor.org/rfc/rfc7299</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-        <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8411">[RFC8411]</dt>
       <dd>
-<span class="refAuthor">Schaad, J.</span> and <span class="refAuthor">R. Andrews</span>, <span class="refTitle">"IANA Registration for the Cryptographic Algorithm Object Identifier Range"</span>, <span class="seriesInfo">RFC 8411</span>, <span class="seriesInfo">DOI 10.17487/RFC8411</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8411">https://www.rfc-editor.org/rfc/rfc8411</a>&gt;</span>. </dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
