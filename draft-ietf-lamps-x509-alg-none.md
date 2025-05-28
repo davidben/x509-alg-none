@@ -112,11 +112,12 @@ when, and only when, they appear in all capitals, as shown here.
 
 # Constructing Unsigned Certificates
 
-This document defines the id-alg-unsigned object identifier (OID) under the OID arc
-defined in {{!RFC8411}}:
+This document defines the id-alg-unsigned and id-rdna-unsigned object
+identifiers (OIDs) under the OID arcs defined in {{!RFC7299}}:
 
 ~~~
   id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 36}
+  id-rdna-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 TBD1 TBD2}
 ~~~
 
 To construct an unsigned X.509 certificate, the sender MUST set the
@@ -145,12 +146,12 @@ The issuer field is not optional, and both {{X.509}} and
 interoperable with existing applications.
 
 Senders MAY use a short placeholder issuer consisting of a single
-relative distinguished name, with a single attribute of type id-alg-unsigned and
+relative distinguished name, with a single attribute of type id-rdna-unsigned and
 value a zero-length UTF8String. This placeholder name, in the string
 representation of {{?RFC2253}}, is:
 
 ~~~
-1.3.6.1.5.5.7.6.36=
+1.3.6.1.5.5.7.TBD1.TBD2=
 ~~~
 
 Alternatively, if the subject is not empty, senders MAY use the subject field,
@@ -215,11 +216,16 @@ signature risk of vulnerabilities analogous to {{JWT}}.
 
 # IANA Considerations
 
-IANA is requested to create the following entry in the SMI Security for PKIX Module Identifier registry, defined by {{!RFC7299}}:
+## Module Identifier
+
+IANA is requested to add the following entry in the "SMI Security for PKIX
+Module Identifier" registry, defined by {{!RFC7299}}:
 
 | Decimal | Description             | References |
 |---------|-------------------------|------------|
 | TBD     | id-mod-algUnsigned-2025 | [this-RFC] |
+
+## Algorithm
 
 IANA is requested to add the following entry to the
 "SMI Security for PKIX Algorithms" registry {{!RFC7299}}:
@@ -227,6 +233,35 @@ IANA is requested to add the following entry to the
 | Decimal | Description     | References |
 |---------|-----------------|------------|
 | 36      | id-alg-unsigned | [this-RFC] |
+
+## Relative Distinguished Name Attribute
+
+To allocate id-rdna-unsigned, this document introduces a new PKIX OID arc for
+relative distinguished name attributes:
+
+IANA is requested to add the following entry to the "SMI Security for PKIX"
+registry {{!RFC7299}}:
+
+| Decimal | Description                           | References |
+|---------|---------------------------------------|------------|
+| TBD1    | Relative Distinguished Name Attribute | [this-RFC] |
+
+IANA is requested to create the "SMI Security for PKIX Relative Distinguished
+Name Attribute" registry within the "Structure of Management Information (SMI)
+Numbers (MIB Module Registrations)" group.
+
+The new registry's description is
+"iso.org.dod.internet.security.mechanisms.pkix.rdna (1.3.6.1.5.5.7.TBD1)".
+
+The new registry has three columns and is initialized with the following values:
+
+| Decimal | Description      | References |
+|---------|------------------|------------|
+| TBD2    | id-rdna-unsigned | [this-RFC] |
+
+Future updates to this table are to be made according to the Specification
+Required policy as defined in {{!RFC5226}}.
+
 
 --- back
 
