@@ -113,7 +113,7 @@ when, and only when, they appear in all capitals, as shown here.
 # Constructing Unsigned Certificates
 
 This document defines the id-alg-unsigned and id-rdna-unsigned object
-identifiers (OIDs) under the OID arcs defined in {{!RFC7299}}:
+identifiers (OIDs) under the OID arc defined in {{!RFC7299}}:
 
 ~~~
   id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 36}
@@ -292,6 +292,15 @@ id-alg-unsigned OBJECT IDENTIFIER ::= { iso(1)
 sa-unsigned SIGNATURE-ALGORITHM ::= {
    IDENTIFIER id-alg-unsigned
    PARAMS ARE absent
+}
+
+id-rdna-unsigned OBJECT IDENTIFIER ::= { iso(1)
+   identified-organization(3) dod(6) internet(1) security(5)
+   mechanisms(5) pkix(7) rdna(TBD1) TBD2 }
+
+at-unsigned ATTRIBUTE ::= {
+   TYPE UTF8String (SIZE (0))
+   IDENTIFIED BY id-rdna-unsigned
 }
 
 END
