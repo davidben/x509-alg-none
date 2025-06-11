@@ -152,10 +152,10 @@ interoperable with existing applications.
 Senders MAY use a short placeholder issuer consisting of a single
 relative distinguished name, with a single attribute of type id-rdna-unsigned and
 value a zero-length UTF8String. This placeholder name, in the string
-representation of {{?RFC2253}}, is:
+representation of {{?RFC4514}}, is:
 
 ~~~
-1.3.6.1.5.5.7.TBD1.TBD2=
+1.3.6.1.5.5.7.TBD1.TBD2=#0C00
 ~~~
 
 Alternatively, if the subject is not empty, senders MAY use the subject field,
