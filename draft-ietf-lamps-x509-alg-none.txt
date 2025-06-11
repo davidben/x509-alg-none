@@ -4,9 +4,9 @@
 
 Limited Additional Mechanisms for PKIX and SMIME             D. Benjamin
 Internet-Draft                                                Google LLC
-Updates: 5280 (if approved)                                  28 May 2025
+Updates: 5280 (if approved)                                 11 June 2025
 Intended status: Standards Track                                        
-Expires: 29 November 2025
+Expires: 13 December 2025
 
 
                       Unsigned X.509 Certificates
@@ -16,7 +16,8 @@ Abstract
 
    This document defines a placeholder X.509 signature algorithm that
    may be used in contexts where the consumer of the certificate is not
-   expected to verify the signature.
+   expected to verify the signature.  As part of this, it updates RFC
+   5280.
 
 About This Document
 
@@ -51,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 November 2025.
+   This Internet-Draft will expire on 13 December 2025.
 
 Copyright Notice
 
@@ -322,7 +323,7 @@ Table of Contents
                                   Table 4
 
    Future updates to this table are to be made according to the
-   Specification Required policy as defined in [RFC5226].
+   Specification Required policy as defined in [RFC8126].
 
 7.  References
 
@@ -333,20 +334,21 @@ Table of Contents
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
-   [RFC5226]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
-              IANA Considerations Section in RFCs", RFC 5226,
-              DOI 10.17487/RFC5226, May 2008,
-              <https://www.rfc-editor.org/rfc/rfc5226>.
-
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
               (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
               <https://www.rfc-editor.org/rfc/rfc5280>.
 
-   [RFC7299]  Housley, R., "Object Identifier Registry for the PKIX
-              Working Group", RFC 7299, DOI 10.17487/RFC7299, July 2014,
-              <https://www.rfc-editor.org/rfc/rfc7299>.
+   [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
+              Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
+              DOI 10.17487/RFC5912, June 2010,
+              <https://www.rfc-editor.org/rfc/rfc5912>.
+
+   [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", BCP 26,
+              RFC 8126, DOI 10.17487/RFC8126, June 2017,
+              <https://www.rfc-editor.org/rfc/rfc8126>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -373,12 +375,16 @@ Table of Contents
               Format", RFC 5914, DOI 10.17487/RFC5914, June 2010,
               <https://www.rfc-editor.org/rfc/rfc5914>.
 
+   [RFC7299]  Housley, R., "Object Identifier Registry for the PKIX
+              Working Group", RFC 7299, DOI 10.17487/RFC7299, July 2014,
+              <https://www.rfc-editor.org/rfc/rfc7299>.
+
    [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
               <https://www.rfc-editor.org/rfc/rfc8446>.
 
    [X.509]    ITU-T, "Information technology - Open Systems
-              Interconnection – The Directory: Public-key and attribute
+              Interconnection - The Directory: Public-key and attribute
               certificate frameworks", ISO/IEC 9594-8:2020 , October
               2019.
 
