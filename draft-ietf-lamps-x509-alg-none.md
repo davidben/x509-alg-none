@@ -28,6 +28,10 @@ author:
     organization: "Google LLC"
     email: davidben@google.com
 
+normative:
+  # From the ASN.1 module.
+  RFC5912:
+
 informative:
   JWT:
     title: How Many Days Has It Been Since a JWT alg:none Vulnerability?
@@ -39,7 +43,7 @@ informative:
       name: "James 'zofrex' Sanderson"
 
   X.509:
-    title: "Information technology - Open Systems Interconnection – The Directory: Public-key and attribute certificate frameworks"
+    title: "Information technology - Open Systems Interconnection - The Directory: Public-key and attribute certificate frameworks"
     date: October 2019
     author:
       org: ITU-T
@@ -52,7 +56,7 @@ informative:
 
 This document defines a placeholder X.509 signature algorithm that may be used
 in contexts where the consumer of the certificate is not expected to verify the
-signature.
+signature. As part of this, it updates RFC 5280.
 
 --- middle
 
@@ -113,7 +117,7 @@ when, and only when, they appear in all capitals, as shown here.
 # Constructing Unsigned Certificates
 
 This document defines the id-alg-unsigned and id-rdna-unsigned object
-identifiers (OIDs) under the OID arc defined in {{!RFC7299}}:
+identifiers (OIDs) under the OID arc defined in {{?RFC7299}}:
 
 ~~~
   id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 36}
@@ -219,7 +223,7 @@ signature risk of vulnerabilities analogous to {{JWT}}.
 ## Module Identifier
 
 IANA is requested to add the following entry in the "SMI Security for PKIX
-Module Identifier" registry, defined by {{!RFC7299}}:
+Module Identifier" registry, defined by {{?RFC7299}}:
 
 | Decimal | Description             | References |
 |---------|-------------------------|------------|
@@ -228,7 +232,7 @@ Module Identifier" registry, defined by {{!RFC7299}}:
 ## Algorithm
 
 IANA is requested to add the following entry to the
-"SMI Security for PKIX Algorithms" registry {{!RFC7299}}:
+"SMI Security for PKIX Algorithms" registry {{?RFC7299}}:
 
 | Decimal | Description     | References |
 |---------|-----------------|------------|
@@ -240,7 +244,7 @@ To allocate id-rdna-unsigned, this document introduces a new PKIX OID arc for
 relative distinguished name attributes:
 
 IANA is requested to add the following entry to the "SMI Security for PKIX"
-registry {{!RFC7299}}:
+registry {{?RFC7299}}:
 
 | Decimal | Description                           | References |
 |---------|---------------------------------------|------------|
@@ -260,7 +264,7 @@ The new registry has three columns and is initialized with the following values:
 | TBD2    | id-rdna-unsigned | [this-RFC] |
 
 Future updates to this table are to be made according to the Specification
-Required policy as defined in {{!RFC5226}}.
+Required policy as defined in {{!RFC8126}}.
 
 
 --- back
