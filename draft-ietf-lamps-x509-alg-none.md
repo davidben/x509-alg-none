@@ -116,19 +116,22 @@ when, and only when, they appear in all capitals, as shown here.
 
 # Constructing Unsigned Certificates
 
-This document defines the id-alg-unsigned and id-rdna-unsigned object
-identifiers (OIDs) under the OID arc defined in {{?RFC7299}}:
+This section describes how to construct an unsigned certificate.
 
-~~~
-  id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 36}
-  id-rdna-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 TBD1 TBD2}
-~~~
+## Signature
 
 To construct an unsigned X.509 certificate, the sender MUST set the
 Certificate's signatureAlgorithm and TBSCertificate's signature fields each to
-an AlgorithmIdentifier with algorithm id-alg-unsigned. The parameters for
-id-alg-unsigned MUST be omitted. The Certificate's signatureValue field MUST be
-a BIT STRING of length zero.
+an AlgorithmIdentifier with algorithm id-alg-unsigned, defined below:
+
+~~~
+  id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 36}
+~~~
+
+The parameters for id-alg-unsigned MUST be omitted. The Certificate's
+signatureValue field MUST be a BIT STRING of length zero.
+
+## Issuer
 
 An unsigned certificate takes the place of a self-signed certificate in
 scenarios where the application only requires subject information. It has no
@@ -142,8 +145,6 @@ In particular, the following fields describe a certificate's issuer:
 
 * issuer ({{Section 4.1.2.4 of !RFC5280}})
 * issuerUniqueID ({{Section 4.1.2.8 of !RFC5280}})
-* authority key identifier ({{Section 4.2.1.1 of !RFC5280}})
-* issuer alternative name ({{Section 4.2.1.7 of !RFC5280}})
 
 The issuer field is not optional, and both {{X.509}} and
 {{Section 4.1.2.4 of !RFC5280}} forbid empty issuers, so such a value may not be
@@ -151,8 +152,13 @@ interoperable with existing applications.
 
 Senders MAY use a short placeholder issuer consisting of a single
 relative distinguished name, with a single attribute of type id-rdna-unsigned and
-value a zero-length UTF8String. This placeholder name, in the string
-representation of {{?RFC4514}}, is:
+value a zero-length UTF8String. id-rdna-unsigned is defined as follows:
+
+~~~
+  id-rdna-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 TBD1 TBD2}
+~~~
+
+This placeholder name, in the string representation of {{?RFC4514}}, is:
 
 ~~~
 1.3.6.1.5.5.7.TBD1.TBD2=#0C00
@@ -164,6 +170,14 @@ example, expect trust anchors to have matching issuer and subject.
 
 Senders MUST omit the issuerUniqueID field, as it is optional, not applicable,
 and already forbidden by {{Section 4.1.2.8 of !RFC5280}}.
+
+## Extensions
+
+Some X.509 extensions also describe the certificate issuer and thus are not
+meaningful for an unsigned certificate:
+
+* authority key identifier ({{Section 4.2.1.1 of !RFC5280}})
+* issuer alternative name ({{Section 4.2.1.7 of !RFC5280}})
 
 Senders SHOULD omit the authority key identifier and issuer alternative name
 extensions. {{Section 4.2.1.1 of !RFC5280}} requires certificates to include
