@@ -150,9 +150,15 @@ The issuer field is not optional, and both {{X.509}} and
 {{Section 4.1.2.4 of !RFC5280}} forbid empty issuers, so such a value may not be
 interoperable with existing applications.
 
-Senders MAY use a short placeholder issuer consisting of a single
-relative distinguished name, with a single attribute of type id-rdna-unsigned and
-value a zero-length UTF8String. id-rdna-unsigned is defined as follows:
+If the subject is not empty, senders MAY use the subject field, as in a
+self-signed certificate. This may be useful in applications that, for example,
+expect trust anchors to have matching issuer and subject. This is, however, a
+placerholder value. The unsigned certificate is not considered self-signed or
+self-issued.
+
+Senders MAY alternatively use a short placeholder issuer consisting of a single
+relative distinguished name, with a single attribute of type id-rdna-unsigned
+and value a zero-length UTF8String. id-rdna-unsigned is defined as follows:
 
 ~~~
   id-rdna-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 TBD1 TBD2}
@@ -163,10 +169,6 @@ This placeholder name, in the string representation of {{?RFC4514}}, is:
 ~~~
 1.3.6.1.5.5.7.TBD1.TBD2=#0C00
 ~~~
-
-Alternatively, if the subject is not empty, senders MAY use the subject field,
-as in a self-signed certificate. This may be useful in applications that, for
-example, expect trust anchors to have matching issuer and subject.
 
 Senders MUST omit the issuerUniqueID field, as it is optional, not applicable,
 and already forbidden by {{Section 4.1.2.8 of !RFC5280}}.
