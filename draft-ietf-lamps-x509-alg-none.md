@@ -232,7 +232,7 @@ trust anchor.
 
 # Security Considerations
 
-It is best practice for cryptographic keys to be used for single purposes. If a
+It is best practice to limit cryptographic keys to a single purpose each. If a
 key is reused across contexts, applications risk cross-protocol attacks when the
 two uses collide. However, in applications that use self-signed end entity
 certificates, the subject's key is necessarily used in two ways: the X.509
