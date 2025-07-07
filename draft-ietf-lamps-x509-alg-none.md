@@ -242,10 +242,10 @@ reuse by removing the X.509 self-signature.
 If an application accepts id-alg-unsigned as part of a certification path, or
 in any other context where it is necessary to verify the X.509 signature, the
 signature check would be bypassed. Thus, {{consuming-unsigned-certificates}}
-prohibits this and recommends that applications not treat id-alg-unsigned
-differently from any other previously unrecognized signature algorithm.
-Non-compliant applications that instead accept id-alg-unsigned as a valid
-signature risk of vulnerabilities analogous to {{JWT}}.
+prohibits this and recommends that applications treat id-alg-unsigned the same
+as any other previously unrecognized signature algorithm. Non-compliant
+applications risk vulnerabilities analogous to those described in {{JWT}} and
+{{Section 1.1 of ?I-D.ietf-jose-deprecate-none-rsa15}}.
 
 The signature in a self-signed certificate is self-derived and thus of limited
 use to convey trust. However, some applications might use it as an integrity
