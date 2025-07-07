@@ -232,11 +232,12 @@ trust anchor.
 
 # Security Considerations
 
-If an application uses a self-signature when constructing a subject-only
-certificate for a non-X.509 key, the X.509 signature payload and those of the
-key's intended use may collide. The self-signature might then be used as part of
-a cross-protocol attack. Using id-alg-unsigned avoids a single key being used
-for both X.509 and the end-entity protocol, eliminating this risk.
+It is best practice for cryptographic keys to be used for single purposes. If a
+key is reused across contexts, applications risk cross-protocol attacks when the
+two uses collide. However, in applications that use self-signed end entity
+certificates, the subject's key is necessarily used in two ways: the X.509
+self-signature, and the end entity protocol. Unsigned certificates fix this key
+reuse by removing the X.509 self-signature.
 
 If an application accepts id-alg-unsigned as part of a certification path, or
 in any other context where it is necessary to verify the X.509 signature, the
