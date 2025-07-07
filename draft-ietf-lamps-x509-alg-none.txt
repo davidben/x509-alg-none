@@ -273,13 +273,13 @@ Table of Contents
 
 5.  Security Considerations
 
-   It is best practice for cryptographic keys to be used for single
-   purposes.  If a key is reused across contexts, applications risk
-   cross-protocol attacks when the two uses collide.  However, in
-   applications that use self-signed end entity certificates, the
-   subject's key is necessarily used in two ways: the X.509 self-
-   signature, and the end entity protocol.  Unsigned certificates fix
-   this key reuse by removing the X.509 self-signature.
+   It is best practice to limit cryptographic keys to a single purpose
+   each.  If a key is reused across contexts, applications risk cross-
+   protocol attacks when the two uses collide.  However, in applications
+   that use self-signed end entity certificates, the subject's key is
+   necessarily used in two ways: the X.509 self-signature, and the end
+   entity protocol.  Unsigned certificates fix this key reuse by
+   removing the X.509 self-signature.
 
    If an application accepts id-alg-unsigned as part of a certification
    path, or in any other context where it is necessary to verify the
