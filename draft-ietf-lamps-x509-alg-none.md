@@ -205,24 +205,30 @@ extension.
 
 # Consuming Unsigned Certificates
 
-X.509 signatures of type id-alg-unsigned are always invalid. This contrasts
-with {{JWT}}. When processing X.509 certificates without verifying signatures,
-receivers MAY accept id-alg-unsigned. When verifying X.509 signatures,
-receivers MUST reject id-alg-unsigned. In particular, X.509 validators MUST
-NOT accept id-alg-unsigned in the place of a signature in the certification
-path.
+X.509 signatures of type id-alg-unsigned are always invalid:
 
-X.509 applications must already account for unknown signature algorithms, so
-applications are RECOMMENDED to satisfy these requirements by ignoring this
-document. An unmodified X.509 validator will not recognize id-alg-unsigned
-and is thus already expected to reject it in the certification path. Conversely,
-in contexts where an X.509 application was ignoring the self-signature,
-id-alg-unsigned will also be ignored, but more efficiently.
+* When processing X.509 certificates without verifying signatures, receivers MAY
+  accept id-alg-unsigned.
+* When verifying X.509 signatures, receivers MUST reject id-alg-unsigned.
 
-In other contexts, applications may require modifications. For example, an
-application that uses self-signedness in interpreting its local configuration
-may need to modify its configuration model or user interface before using an
-unsigned certificate as a trust anchor.
+In particular, X.509 validators MUST NOT accept id-alg-unsigned in the place of
+a signature in the certification path.
+
+It is expected that most unmodified X.509 applications will already be
+compliant with this guidance. Applications are thus RECOMMENDED to satisfy these
+requirements by ignoring this document, and instead treating id-alg-unsigned as
+the same as an unrecognized signature algorithm. An unmodified X.509
+validator will unable to verify the signature (Step (a.1) of
+{{Section 6.1.3 of !RFC5280}}) and thus reject the certification path.
+Conversely, in contexts where an X.509 application was ignoring the
+self-signature, id-alg-unsigned will also be ignored, but more efficiently.
+
+In other contexts, an application may require modifications, or limit itself to
+particular forms of unsigned certificate. For example, an application might
+check self-signedness to classify locally-configured certificates as trust
+anchors or untrusted intermediates. Such an application may need to modify its
+configuration model or user interface before using an unsigned certificate as a
+trust anchor.
 
 # Security Considerations
 
