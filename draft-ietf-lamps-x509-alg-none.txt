@@ -4,9 +4,9 @@
 
 Limited Additional Mechanisms for PKIX and SMIME             D. Benjamin
 Internet-Draft                                                Google LLC
-Updates: 5280 (if approved)                                 11 June 2025
+Updates: 5280 (if approved)                                  7 July 2025
 Intended status: Standards Track                                        
-Expires: 13 December 2025
+Expires: 8 January 2026
 
 
                       Unsigned X.509 Certificates
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 December 2025.
+   This Internet-Draft will expire on 8 January 2026.
 
 Copyright Notice
 
@@ -73,6 +73,9 @@ Table of Contents
    1.  Introduction
    2.  Conventions and Definitions
    3.  Constructing Unsigned Certificates
+     3.1.  Signature
+     3.2.  Issuer
+     3.3.  Extensions
    4.  Consuming Unsigned Certificates
    5.  Security Considerations
    6.  IANA Considerations
@@ -148,18 +151,22 @@ Table of Contents
 
 3.  Constructing Unsigned Certificates
 
-   This document defines the id-alg-unsigned and id-rdna-unsigned object
-   identifiers (OIDs) under the OID arc defined in [RFC7299]:
+   This section describes how to construct an unsigned certificate.
 
-     id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 36}
-     id-rdna-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 TBD1 TBD2}
+3.1.  Signature
 
    To construct an unsigned X.509 certificate, the sender MUST set the
    Certificate's signatureAlgorithm and TBSCertificate's signature
-   fields each to an AlgorithmIdentifier with algorithm id-alg-unsigned.
+   fields each to an AlgorithmIdentifier with algorithm id-alg-unsigned,
+   defined below:
+
+     id-alg-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 36}
+
    The parameters for id-alg-unsigned MUST be omitted.  The
    Certificate's signatureValue field MUST be a BIT STRING of length
    zero.
+
+3.2.  Issuer
 
    An unsigned certificate takes the place of a self-signed certificate
    in scenarios where the application only requires subject information.
@@ -175,28 +182,38 @@ Table of Contents
 
    *  issuerUniqueID (Section 4.1.2.8 of [RFC5280])
 
-   *  authority key identifier (Section 4.2.1.1 of [RFC5280])
-
-   *  issuer alternative name (Section 4.2.1.7 of [RFC5280])
-
    The issuer field is not optional, and both [X.509] and
    Section 4.1.2.4 of [RFC5280] forbid empty issuers, so such a value
    may not be interoperable with existing applications.
 
-   Senders MAY use a short placeholder issuer consisting of a single
-   relative distinguished name, with a single attribute of type id-rdna-
-   unsigned and value a zero-length UTF8String.  This placeholder name,
-   in the string representation of [RFC4514], is:
+   If the subject is not empty, senders MAY use the subject field, as in
+   a self-signed certificate.  This may be useful in applications that,
+   for example, expect trust anchors to have matching issuer and
+   subject.  This is, however, a placerholder value.  The unsigned
+   certificate is not considered self-signed or self-issued.
+
+   Senders MAY alternatively use a short placeholder issuer consisting
+   of a single relative distinguished name, with a single attribute of
+   type id-rdna-unsigned and value a zero-length UTF8String. id-rdna-
+   unsigned is defined as follows:
+
+     id-rdna-unsigned OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 TBD1 TBD2}
+
+   This placeholder name, in the string representation of [RFC4514], is:
 
    1.3.6.1.5.5.7.TBD1.TBD2=#0C00
 
-   Alternatively, if the subject is not empty, senders MAY use the
-   subject field, as in a self-signed certificate.  This may be useful
-   in applications that, for example, expect trust anchors to have
-   matching issuer and subject.
-
    Senders MUST omit the issuerUniqueID field, as it is optional, not
    applicable, and already forbidden by Section 4.1.2.8 of [RFC5280].
+
+3.3.  Extensions
+
+   Some X.509 extensions also describe the certificate issuer and thus
+   are not meaningful for an unsigned certificate:
+
+   *  authority key identifier (Section 4.2.1.1 of [RFC5280])
+
+   *  issuer alternative name (Section 4.2.1.7 of [RFC5280])
 
    Senders SHOULD omit the authority key identifier and issuer
    alternative name extensions.  Section 4.2.1.1 of [RFC5280] requires
@@ -211,52 +228,74 @@ Table of Contents
 
    *  basic constraints (Section 4.2.1.9 of [RFC5280])
 
-   Senders SHOULD fill in these values to reflect the subject.  In
-   particular, an unsigned end entity certificate does not issue itself,
-   so it SHOULD NOT assert the keyCertSign key usage bit, and it SHOULD
-   either omit the basic constraints extension or set the cA boolean to
-   FALSE.
+   Senders SHOULD fill in these values to reflect the subject.  That is:
+
+   If the subject is a CA, it SHOULD assert the keyCertSign key usage
+   bit and SHOULD include a basic constraints extensions that sets the
+   cA boolean to TRUE.
+
+   If the subject is an end entity, it SHOULD NOT assert the keyCertSign
+   key usage bit, and it SHOULD either omit the basic constraints
+   extension or set the cA boolean to FALSE.  Unlike a self-signed
+   certificate, an unsigned certificate does not issue itself, so there
+   is no need to accommodate a self-signature in either extension.
 
 4.  Consuming Unsigned Certificates
 
-   X.509 signatures of type id-alg-unsigned are always invalid.  This
-   contrasts with [JWT].  When processing X.509 certificates without
-   verifying signatures, receivers MAY accept id-alg-unsigned.  When
-   verifying X.509 signatures, receivers MUST reject id-alg-unsigned.
+   X.509 signatures of type id-alg-unsigned are always invalid:
+
+   *  When processing X.509 certificates without verifying signatures,
+      receivers MAY accept id-alg-unsigned.
+
+   *  When verifying X.509 signatures, receivers MUST reject id-alg-
+      unsigned.
+
    In particular, X.509 validators MUST NOT accept id-alg-unsigned in
    the place of a signature in the certification path.
 
-   X.509 applications must already account for unknown signature
-   algorithms, so applications are RECOMMENDED to satisfy these
-   requirements by ignoring this document.  An unmodified X.509
-   validator will not recognize id-alg-unsigned and is thus already
-   expected to reject it in the certification path.  Conversely, in
-   contexts where an X.509 application was ignoring the self-signature,
-   id-alg-unsigned will also be ignored, but more efficiently.
+   It is expected that most unmodified X.509 applications will already
+   be compliant with this guidance.  Applications are thus RECOMMENDED
+   to satisfy these requirements by ignoring this document, and instead
+   treating id-alg-unsigned as the same as an unrecognized signature
+   algorithm.  An unmodified X.509 validator will unable to verify the
+   signature (Step (a.1) of Section 6.1.3 of [RFC5280]) and thus reject
+   the certification path.  Conversely, in contexts where an X.509
+   application was ignoring the self-signature, id-alg-unsigned will
+   also be ignored, but more efficiently.
 
-   In other contexts, applications may require modifications.  For
-   example, an application that uses self-signedness in interpreting its
-   local configuration may need to modify its configuration model or
+   In other contexts, an application may require modifications, or limit
+   itself to particular forms of unsigned certificate.  For example, an
+   application might check self-signedness to classify locally-
+   configured certificates as trust anchors or untrusted intermediates.
+   Such an application may need to modify its configuration model or
    user interface before using an unsigned certificate as a trust
    anchor.
 
 5.  Security Considerations
 
-   If an application uses a self-signature when constructing a subject-
-   only certificate for a non-X.509 key, the X.509 signature payload and
-   those of the key's intended use may collide.  The self-signature
-   might then be used as part of a cross-protocol attack.  Using id-alg-
-   unsigned avoids a single key being used for both X.509 and the end-
-   entity protocol, eliminating this risk.
+   It is best practice for cryptographic keys to be used for single
+   purposes.  If a key is reused across contexts, applications risk
+   cross-protocol attacks when the two uses collide.  However, in
+   applications that use self-signed end entity certificates, the
+   subject's key is necessarily used in two ways: the X.509 self-
+   signature, and the end entity protocol.  Unsigned certificates fix
+   this key reuse by removing the X.509 self-signature.
 
    If an application accepts id-alg-unsigned as part of a certification
    path, or in any other context where it is necessary to verify the
    X.509 signature, the signature check would be bypassed.  Thus,
-   Section 4 prohibits this and recommends that applications not treat
-   id-alg-unsigned differently from any other previously unrecognized
-   signature algorithm.  Non-compliant applications that instead accept
-   id-alg-unsigned as a valid signature risk of vulnerabilities
-   analogous to [JWT].
+   Section 4 prohibits this and recommends that applications treat id-
+   alg-unsigned the same as any other previously unrecognized signature
+   algorithm.  Non-compliant applications risk vulnerabilities analogous
+   to those described in [JWT] and Section 1.1 of
+   [I-D.ietf-jose-deprecate-none-rsa15].
+
+   The signature in a self-signed certificate is self-derived and thus
+   of limited use to convey trust.  However, some applications might use
+   it as an integrity check to guard against accidental storage
+   corruption, etc.  An unsigned certificate does not provide any
+   integrity check.  Applications checking self-signature for integrity
+   SHOULD instead use some other mechanism, such as an external hash.
 
 6.  IANA Considerations
 
@@ -355,6 +394,13 @@ Table of Contents
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
 7.2.  Informative References
+
+   [I-D.ietf-jose-deprecate-none-rsa15]
+              Madden, N., "JOSE: Deprecate 'none' and 'RSA1_5'", Work in
+              Progress, Internet-Draft, draft-ietf-jose-deprecate-none-
+              rsa15-02, 2 April 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
+              deprecate-none-rsa15-02>.
 
    [JWT]      Sanderson, J., "How Many Days Has It Been Since a JWT
               alg:none Vulnerability?", 9 October 2024,
