@@ -246,6 +246,13 @@ differently from any other previously unrecognized signature algorithm.
 Non-compliant applications that instead accept id-alg-unsigned as a valid
 signature risk of vulnerabilities analogous to {{JWT}}.
 
+The signature in a self-signed certificate is self-derived and thus of limited
+use to convey trust. However, some applications might use it as an integrity
+check to guard against accidental storage corruption, etc. An unsigned
+certificate does not provide any integrity check. Applications checking
+self-signature for integrity SHOULD instead use some other mechanism, such as an
+external hash.
+
 # IANA Considerations
 
 ## Module Identifier
