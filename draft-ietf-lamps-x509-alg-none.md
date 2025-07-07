@@ -190,10 +190,16 @@ Some extensions reflect whether the subject is a CA or an end entity:
 * key usage ({{Section 4.2.1.3 of !RFC5280}})
 * basic constraints ({{Section 4.2.1.9 of !RFC5280}})
 
-Senders SHOULD fill in these values to reflect the subject. In particular, an
-unsigned end entity certificate does not issue itself, so it SHOULD NOT assert
-the keyCertSign key usage bit, and it SHOULD either omit the basic constraints
-extension or set the cA boolean to FALSE.
+Senders SHOULD fill in these values to reflect the subject. That is:
+
+If the subject is a CA, it SHOULD assert the keyCertSign key usage bit and
+SHOULD include a basic constraints extensions that sets the cA boolean to TRUE.
+
+If the subject is an end entity, it SHOULD NOT assert the keyCertSign key usage
+bit, and it SHOULD either omit the basic constraints extension or set the cA
+boolean to FALSE. Unlike a self-signed certificate, an unsigned certificate does
+not issue itself, so there is no need to accommodate a self-signature in either
+extension.
 
 # Consuming Unsigned Certificates
 
