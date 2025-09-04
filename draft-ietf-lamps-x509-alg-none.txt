@@ -4,9 +4,9 @@
 
 Limited Additional Mechanisms for PKIX and SMIME             D. Benjamin
 Internet-Draft                                                Google LLC
-Updates: 5280 (if approved)                                  7 July 2025
+Updates: 5280 (if approved)                             4 September 2025
 Intended status: Standards Track                                        
-Expires: 8 January 2026
+Expires: 8 March 2026
 
 
                       Unsigned X.509 Certificates
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 January 2026.
+   This Internet-Draft will expire on 8 March 2026.
 
 Copyright Notice
 
@@ -186,11 +186,12 @@ Table of Contents
    Section 4.1.2.4 of [RFC5280] forbid empty issuers, so such a value
    may not be interoperable with existing applications.
 
-   If the subject is not empty, senders MAY use the subject field, as in
-   a self-signed certificate.  This may be useful in applications that,
-   for example, expect trust anchors to have matching issuer and
-   subject.  This is, however, a placerholder value.  The unsigned
-   certificate is not considered self-signed or self-issued.
+   If the subject is not empty, senders MAY set the issuer to the
+   subject, similar how they would construct a self-signed certificate.
+   This may be useful in applications that, for example, expect trust
+   anchors to have matching issuer and subject.  This is, however, a
+   placerholder value.  The unsigned certificate is not considered self-
+   signed or self-issued.
 
    Senders MAY alternatively use a short placeholder issuer consisting
    of a single relative distinguished name, with a single attribute of
@@ -254,14 +255,14 @@ Table of Contents
    the place of a signature in the certification path.
 
    It is expected that most unmodified X.509 applications will already
-   be compliant with this guidance.  Applications are thus RECOMMENDED
-   to satisfy these requirements by ignoring this document, and instead
-   treating id-alg-unsigned as the same as an unrecognized signature
-   algorithm.  An unmodified X.509 validator will unable to verify the
-   signature (Step (a.1) of Section 6.1.3 of [RFC5280]) and thus reject
-   the certification path.  Conversely, in contexts where an X.509
-   application was ignoring the self-signature, id-alg-unsigned will
-   also be ignored, but more efficiently.
+   be compliant with this guidance.  X.509 applications are thus
+   RECOMMENDED to satisfy these requirements by ignoring this document,
+   and instead treating id-alg-unsigned as the same as an unrecognized
+   signature algorithm.  An unmodified X.509 validator will be unable to
+   verify the signature (Step (a.1) of Section 6.1.3 of [RFC5280]) and
+   thus reject the certification path.  Conversely, in contexts where an
+   X.509 application was ignoring the self-signature, id-alg-unsigned
+   will also be ignored, but more efficiently.
 
    In other contexts, an application may require modifications, or limit
    itself to particular forms of unsigned certificate.  For example, an
@@ -295,7 +296,8 @@ Table of Contents
    it as an integrity check to guard against accidental storage
    corruption, etc.  An unsigned certificate does not provide any
    integrity check.  Applications checking self-signature for integrity
-   SHOULD instead use some other mechanism, such as an external hash.
+   SHOULD instead use some other mechanism, such as an external hash
+   that is verified out of band.
 
 6.  IANA Considerations
 
