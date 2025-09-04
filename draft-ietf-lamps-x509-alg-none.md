@@ -154,7 +154,7 @@ If the subject is not empty, senders MAY set the issuer to the subject, similar
 how they would construct a self-signed certificate.
 This may be useful in applications that, for example,
 expect trust anchors to have matching issuer and subject. This is, however, a
-placerholder value. The unsigned certificate is not considered self-signed or
+placeholder value. The unsigned certificate is not considered self-signed or
 self-issued.
 
 Senders MAY alternatively use a short placeholder issuer consisting of a single
