@@ -252,7 +252,7 @@ use to convey trust. However, some applications might use it as an integrity
 check to guard against accidental storage corruption, etc. An unsigned
 certificate does not provide any integrity check. Applications checking
 self-signature for integrity SHOULD instead use some other mechanism, such as an
-external hash.
+external hash that is verified out of band.
 
 # IANA Considerations
 
