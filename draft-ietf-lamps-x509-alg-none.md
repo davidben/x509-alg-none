@@ -116,7 +116,7 @@ when, and only when, they appear in all capitals, as shown here.
 
 # Constructing Unsigned Certificates
 
-This section describes how to construct an unsigned certificate.
+This section describes how a sender constructs an unsigned certificate.
 
 ## Signature
 
