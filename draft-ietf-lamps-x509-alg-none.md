@@ -218,7 +218,7 @@ It is expected that most unmodified X.509 applications will already be
 compliant with this guidance. Applications are thus RECOMMENDED to satisfy these
 requirements by ignoring this document, and instead treating id-alg-unsigned as
 the same as an unrecognized signature algorithm. An unmodified X.509
-validator will unable to verify the signature (Step (a.1) of
+validator will be unable to verify the signature (Step (a.1) of
 {{Section 6.1.3 of !RFC5280}}) and thus reject the certification path.
 Conversely, in contexts where an X.509 application was ignoring the
 self-signature, id-alg-unsigned will also be ignored, but more efficiently.
