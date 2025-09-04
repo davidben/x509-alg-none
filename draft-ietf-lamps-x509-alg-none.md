@@ -150,8 +150,9 @@ The issuer field is not optional, and both {{X.509}} and
 {{Section 4.1.2.4 of !RFC5280}} forbid empty issuers, so such a value may not be
 interoperable with existing applications.
 
-If the subject is not empty, senders MAY use the subject field, as in a
-self-signed certificate. This may be useful in applications that, for example,
+If the subject is not empty, senders MAY set the issuer to the subject, similar
+how they would construct a self-signed certificate.
+This may be useful in applications that, for example,
 expect trust anchors to have matching issuer and subject. This is, however, a
 placerholder value. The unsigned certificate is not considered self-signed or
 self-issued.
